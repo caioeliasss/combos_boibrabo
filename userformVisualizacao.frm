@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformVisualizacao 
-   Caption         =   "Visualização"
+   Caption         =   "Visualizar"
    ClientHeight    =   12405
    ClientLeft      =   120
    ClientTop       =   465
@@ -63,7 +63,7 @@ End Sub
 Private Sub button_clonar_Click()
     
     If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("Está opção só é valida para os combos")
+        MsgBox ("EstÃ¡ opÃ§Ã£o sÃ³ Ã© valida para os combos")
         Exit Sub
     End If
     
