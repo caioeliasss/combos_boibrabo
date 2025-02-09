@@ -1,3 +1,4 @@
+Attribute VB_Name = "ModAtualizador"
 Sub AtualizarVBA()
     Dim vbProj As Object
     Dim vbComp As Object
