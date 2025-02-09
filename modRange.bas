@@ -1,4 +1,11 @@
 Attribute VB_Name = "modRange"
+Public Sub setHeaders()
+    
+    Produtos.Range("w1").Value = "Un."
+
+
+End Sub
+
 Public Sub clonarCombo(id As String)
 Dim var As Variant
 Dim var_prod As Variant
@@ -293,6 +300,7 @@ Dim var As Variant
 Dim filteredVar As Variant
 ReDim filteredVar(1 To 1000, 1 To 15)
 
+Call setHeaders
 Call apagarVestigios
 
 Set rg = Produtos.Range("a1").CurrentRegion
