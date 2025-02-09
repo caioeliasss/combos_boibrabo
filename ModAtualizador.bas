@@ -1,4 +1,3 @@
-Attribute VB_Name = "ModAtualizador"
 Sub AtualizarVBA()
     Dim vbProj As Object
     Dim vbComp As Object
@@ -14,11 +13,11 @@ Sub AtualizarVBA()
     URLModulo = "https://drive.google.com/uc?export=download&id=ID_DO_MODULO"
     URLUserForm = "https://drive.google.com/uc?export=download&id=1E2RM00XGquIkkoEt322dzvxsDjuu6S4n"
 
-    ' Definir caminhos temporários para salvar os arquivos baixados
+    ' Definir caminhos temporÃ¡rios para salvar os arquivos baixados
     CaminhoModulo = Environ("TEMP") & "\Modulo1.bas"
     CaminhoUserForm = Environ("TEMP") & "\UserForm1.frm"
 
-    ' Criar objeto para baixar o módulo
+    ' Criar objeto para baixar o mÃ³dulo
     Set http = CreateObject("MSXML2.XMLHTTP")
     http.Open "GET", URLModulo, False
     http.Send
@@ -46,7 +45,7 @@ Sub AtualizarVBA()
     ' Atualizar os componentes VBA
     Set vbProj = ThisWorkbook.VBProject
     
-    ' Remover módulo antigo e importar o novo
+    ' Remover mÃ³dulo antigo e importar o novo
     On Error Resume Next
     vbProj.VBComponents.Remove vbProj.VBComponents("Modulo1")
     On Error GoTo 0
@@ -58,6 +57,6 @@ Sub AtualizarVBA()
     On Error GoTo 0
     vbProj.VBComponents.Import CaminhoUserForm
 
-    MsgBox "Código e UserForms atualizados com sucesso!", vbInformation
+    MsgBox "CÃ³digo e UserForms atualizados com sucesso!", vbInformation
 End Sub
 
