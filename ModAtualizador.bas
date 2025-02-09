@@ -17,7 +17,7 @@ Sub AtualizarVBA()
     Dim NomeUserForm As String
     Dim i As Integer
 
-    ' Array de módulos para atualizar
+    ' Array de m?os para atualizar
     modArray = Array( _
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/modDatabase.bas", "modDatabase"), _
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/modRange.bas", "modRange") _
@@ -32,7 +32,7 @@ Sub AtualizarVBA()
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario_V2.frm", "Calendario_V2", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario_V2.frx"))
     
     ' -------------------------------
-    ' Processar módulos (.bas)
+    ' Processar m?os (.bas)
     ' -------------------------------
     For i = LBound(modArray) To UBound(modArray)
         URLModulo = modArray(i)(0)
@@ -46,7 +46,7 @@ Sub AtualizarVBA()
         If http.status = 200 Then
             texto = http.responseText
         Else
-            MsgBox "Erro ao baixar o módulo: " & NomeModulo, vbCritical
+            MsgBox "Erro ao baixar o m?o: " & NomeModulo, vbCritical
             Exit Sub
         End If
         
@@ -59,6 +59,8 @@ Sub AtualizarVBA()
         On Error Resume Next
         vbProj.VBComponents.Remove vbProj.VBComponents(NomeModulo)
         On Error GoTo 0
+        
+        DoEvents
         
         Set vbComp = vbProj.VBComponents.Import(CaminhoModulo)
         vbComp.Name = NomeModulo
@@ -92,7 +94,7 @@ Sub AtualizarVBA()
         Print #fileNum, texto
         Close #fileNum
         
-        ' Baixar o arquivo .frx usando ADODB.Stream (para preservar os dados binários)
+        ' Baixar o arquivo .frx usando ADODB.Stream (para preservar os dados bin?os)
         If Not DownloadBinaryFile(URLFrx, CaminhoFrx) Then
             MsgBox "Erro ao baixar o arquivo .frx para o UserForm: " & NomeUserForm, vbCritical
             Exit Sub
@@ -103,7 +105,9 @@ Sub AtualizarVBA()
         vbProj.VBComponents.Remove vbProj.VBComponents(NomeUserForm)
         On Error GoTo 0
         
-        ' Importar o UserForm (o VBA automaticamente procurará o .frx correspondente no mesmo diretório)
+        DoEvents
+        
+        ' Importar o UserForm (o VBA automaticamente procurar? .frx correspondente no mesmo diret?)
         On Error Resume Next
         vbProj.VBComponents.Import (CaminhoUserForm)
         If Err.Number <> 0 Then
@@ -115,10 +119,10 @@ Sub AtualizarVBA()
     Next i
     
     ThisWorkbook.Save
-    MsgBox "Atualização concluída com sucesso!", vbInformation
+    MsgBox "Atualiza? conclu? com sucesso!", vbInformation
 End Sub
 
-' Função para baixar arquivos binários usando ADODB.Stream
+' Fun? para baixar arquivos bin?os usando ADODB.Stream
 Function DownloadBinaryFile(URL As String, FilePath As String) As Boolean
     Dim stm As Object
     Dim xmlHttp As Object
@@ -146,5 +150,6 @@ Function DownloadBinaryFile(URL As String, FilePath As String) As Boolean
 errHandler:
     DownloadBinaryFile = False
 End Function
+
 
 
