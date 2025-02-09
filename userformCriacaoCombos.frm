@@ -317,7 +317,7 @@ End If
     listCombos.ColumnCount = rg.Columns.Count
     listCombos.RowSource = rg.Address(external:=True)
     listCombos.ColumnHeads = True
-    listCombos.ColumnWidths = "40;150;30;55;35;55;50;50"
+    listCombos.ColumnWidths = "35;150;30;65;35;60;45;45"
 End Sub
 
 
