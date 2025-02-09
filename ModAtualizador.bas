@@ -29,7 +29,7 @@ Sub AtualizarVBA()
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformAlterarCombo.frm", "userformAlterarCombo", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformAlterarCombo.frx"), _
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformCriacaoCombos.frm", "userformCriacaoCombos", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformCriacaoCombos.frx"), _
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformVisualizacao.frm", "userformVisualizacao", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformVisualizacao.frx"), _
-        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario_V2.frm", "Calendario_V2", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario_V2.frx"))
+        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario_V2.frm", "Calendario", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario_V2.frx"))
     
     ' -------------------------------
     ' Processar m?os (.bas)
@@ -119,7 +119,6 @@ Sub AtualizarVBA()
     Next i
     
     ThisWorkbook.Save
-    MsgBox "Atualiza? conclu? com sucesso!", vbInformation
 End Sub
 
 ' Fun? para baixar arquivos bin?os usando ADODB.Stream
@@ -150,6 +149,7 @@ Function DownloadBinaryFile(URL As String, FilePath As String) As Boolean
 errHandler:
     DownloadBinaryFile = False
 End Function
+
 
 
 
