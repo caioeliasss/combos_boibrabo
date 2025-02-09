@@ -49,8 +49,8 @@ Dim avulsoRange As Range
 Dim varAvulsos As Variant
 
 
-    status = InputBox("Insira o status (não pode estar vazio, caso contrario cancelará a operação)", "Status")
-    observacao = InputBox("Insira o intervalo de peso da peça principal (não pode estar vazio, caso contrario cancelará a operação)", "Intervalo de peso")
+    status = InputBox("Insira o status (nao pode estar vazio, caso contrario cancelara a operacao)", "Status")
+    observacao = InputBox("Insira o intervalo de peso da peca principal (nao pode estar vazio, caso contrario cancelara a operacao)", "Intervalo de peso")
     If status = "" Then Exit Sub
     If observacao = "" Then Exit Sub
 
@@ -161,7 +161,7 @@ Private Sub listProdutos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 
     lista_index_produto = listProdutos.ListIndex
     
-    ' Verifica se há um item selecionado
+    ' Verifica se hÃ¡ um item selecionado
     If lista_index_produto = -1 Then Exit Sub
     
     last_row = Produtos.Range("u1").CurrentRegion.Rows.Count + 1
@@ -272,7 +272,7 @@ Call calcularVenda
 End Sub
 
 Private Sub textbox_venda_Change()
-    On Error Resume Next ' Ignora erros e continua a execução
+    On Error Resume Next ' Ignora erros e continua a execuÃ§Ã£o
 
     If Val(textbox_venda) = 0 Then Exit Sub
 
@@ -313,7 +313,7 @@ Else
     Set rg = rg.Offset(1).Resize(rg.Rows.Count - 1)
 End If
 
-' Configura o ListBox do cabeçalho
+' Configura o ListBox do cabeÃ§alho
     listCombos.ColumnCount = rg.Columns.Count
     listCombos.RowSource = rg.Address(external:=True)
     listCombos.ColumnHeads = True
