@@ -61,6 +61,8 @@ ReDim filteredVar(1 To 1000, 1 To 15)
 ReDim comboVar(1 To 500, 1 To 15)
 ReDim avulsoVar(1 To 500, 1 To 10)
 
+Descritivo.Range("a2:h1000").ClearContents
+
 set rg = Combos.Range("a1").CurrentRegion
 rg.Sort Key1:=rg.Columns(5), Order1:=xlDescending, Header:=xlNo
 var = rg
