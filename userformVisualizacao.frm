@@ -108,7 +108,7 @@ Private Sub button_gerarPDF_Click()
         
         ' Definir caminho e nome do arquivo
         caminho = ThisWorkbook.Path & "\"
-        nomeArquivo = "Descritivo " & Format(Now, "dd_mm_yyyy-hh_mm_ss") & ".pdf"
+        nomeArquivo = "Descritivo " & Format(Now, "dd-mm-yyyy") & ".pdf"
         
         Descritivo.PageSetup.Orientation = xlLandscape
         
