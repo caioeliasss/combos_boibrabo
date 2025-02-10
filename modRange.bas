@@ -81,11 +81,13 @@ For j = 1 To UBound(comboVar)
     If comboVar(j, 1) <> "" Then
         filteredVar(count_, 1) = "-----------------------"
         filteredVar(count_, 2) = "------------------------------------------"
-        filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: " & comboVar(j, 5) & " | Intervalo: " & comboVar(j, 9)
+        filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: " & comboVar(j, 5)
         filteredVar(count_, 4) = "------------------------------------------"
         filteredVar(count_, 5) = "------------------------------------------"
         filteredVar(count_, 6) = "------------------------------------------"
         filteredVar(count_, 7) = "------------------------------------------------------------------------------"
+        count_ = count_ + 1
+        filteredVar(count_, 3) = "Status: " & comboVar(j, 8) & " | Intervalo: " & comboVar(j, 9)
         count_ = count_ + 1
         count_2 = count_2 + 1
     Else: Exit For
