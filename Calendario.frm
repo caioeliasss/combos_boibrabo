@@ -5,7 +5,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} Calendario
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   4380
-   OleObjectBlob   =   "Calendario_V2.frx":0000
+   OleObjectBlob   =   "Calendario.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
 Attribute VB_Name = "Calendario"
@@ -915,7 +915,7 @@ Select Case mes
     Case 2
         mesName = "Fevereiro"
     Case 3
-        mesName = "Março"
+        mesName = "MarÃ§o"
     Case 4
         mesName = "Abril"
     Case 5
