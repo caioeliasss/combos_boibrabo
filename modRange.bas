@@ -87,7 +87,9 @@ For j = 1 To UBound(comboVar)
         filteredVar(count_, 6) = "------------------------------------------"
         filteredVar(count_, 7) = "------------------------------------------------------------------------------"
         count_ = count_ + 1
-        filteredVar(count_, 3) = "Status: " & comboVar(j, 8) & " | Intervalo: " & comboVar(j, 9)
+        filteredVar(count_, 3) = "Status: " & comboVar(j, 8)
+        count_ = count_ + 1
+        filteredVar(count_, 3) = "Intervalo: " & comboVar(j, 9)
         count_ = count_ + 1
         count_2 = count_2 + 1
     Else: Exit For
@@ -95,7 +97,11 @@ For j = 1 To UBound(comboVar)
     For i = 1 To UBound(var)
         If var(i, 1) = comboVar(j, 1) Then
             For col = 1 To UBound(var, 2)
-                filteredVar(count_, col) = var(i, col)
+                If col = 7 Or col = 5 Then
+                Else
+                
+                    filteredVar(count_, col) = var(i, col)
+                End If
             Next col
             count_ = count_ + 1
         End If
