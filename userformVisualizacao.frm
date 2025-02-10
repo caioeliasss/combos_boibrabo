@@ -108,11 +108,12 @@ Private Sub button_gerarPDF_Click()
         ' Definir a planilha e o intervalo
         Set rng = Descritivo.Range("A1").CurrentRegion
         Set rng = rng.Offset(, 1).Resize(, rng.Columns.Count - 1)
+         Descritivo.Visible = xlSheetVisible
         Descritivo.PageSetup.PrintArea = rng.Address
 
         ' Definir caminho e nome do arquivo
         caminho = ThisWorkbook.Path & "\PDFs\"
-        nomeArquivo = "Descritivo " & Format(Now, "dd-mm-yyyy") & ".pdf"
+        nomeArquivo = "Descritivo " & Format(CDate(button_calendario.Caption), "dd-mm-yyyy") & ".pdf"
         
         Descritivo.PageSetup.Orientation = xlLandscape
         
@@ -126,7 +127,7 @@ Private Sub button_gerarPDF_Click()
         ' Mensagem de confirmação
         Descritivo.Range("h1").ClearContents
         Descritivo.Range("h2").ClearContents
-        
+        Descritivo.Visible = xlSheetHidden
         MsgBox "PDF salvo", vbInformation, "Sucesso"
         
     End If
