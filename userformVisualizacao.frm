@@ -64,7 +64,7 @@ End Sub
 Private Sub button_clonar_Click()
     
     If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("Est· opÁ„o sÛ È valida para os combos")
+        MsgBox ("Est√° op√ß√£o s√≥ √© valida para os combos")
         Exit Sub
     End If
     
@@ -108,7 +108,7 @@ Private Sub button_gerarPDF_Click()
         
         ' Definir caminho e nome do arquivo
         caminho = ThisWorkbook.Path & "\"
-        nomeArquivo = "Descritivo_" & Format(Now, "dd_mm_yyyy-hh_mm_ss") & ".pdf"
+        nomeArquivo = "Descritivo " & Format(Now, "dd_mm_yyyy-hh_mm_ss") & ".pdf"
         
         Descritivo.PageSetup.Orientation = xlLandscape
         
@@ -120,7 +120,7 @@ Private Sub button_gerarPDF_Click()
                                 IgnorePrintAreas:=False, _
                                 OpenAfterPublish:=True
         
-        ' Mensagem de confirmaÁ„o
+        ' Mensagem de confirma√ß√£o
         MsgBox "PDF salvo", vbInformation, "Sucesso"
         
     End If
