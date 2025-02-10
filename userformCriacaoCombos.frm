@@ -105,7 +105,7 @@ Else
     Combos.Cells(last_row_combos, 1) = combo_id
     Combos.Cells(last_row_combos, 2) = lista_produtos
     Combos.Cells(last_row_combos, 3) = lista_produto_id
-    Combos.Cells(last_row_combos, 4) = CDbl(cdlabel_custo)
+    Combos.Cells(last_row_combos, 4) = CDbl(label_custo)
     Combos.Cells(last_row_combos, 5) = CDbl(textbox_venda)
     Combos.Cells(last_row_combos, 6) = Date
     Combos.Cells(last_row_combos, 7) = ""
