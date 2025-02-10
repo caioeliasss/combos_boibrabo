@@ -61,7 +61,9 @@ ReDim filteredVar(1 To 1000, 1 To 15)
 ReDim comboVar(1 To 500, 1 To 15)
 ReDim avulsoVar(1 To 500, 1 To 10)
 
-var = Combos.Range("a1").CurrentRegion
+rg = Combos.Range("a1").CurrentRegion
+rg.Sort Key1:=rg.Columns(5), Order1:=xlDescending, Header:=xlNo
+var = rg
 count_ = 1
 For i = 1 To UBound(var)
     
