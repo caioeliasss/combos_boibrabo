@@ -29,7 +29,8 @@ Sub AtualizarVBA()
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformAlterarCombo.frm", "userformAlterarCombo", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformAlterarCombo.frx"), _
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformCriacaoCombos.frm", "userformCriacaoCombos", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformCriacaoCombos.frx"), _
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformVisualizacao.frm", "userformVisualizacao", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformVisualizacao.frx"), _
-        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario.frm", "Calendario", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario.frx"))
+        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario.frm", "Calendario", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/Calendario.frx"), _
+        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformDataUso.frm", "userformDataUso", "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/userformDataUso.frx"))
     
     ' -------------------------------
     ' Processar m?os (.bas)
@@ -149,6 +150,7 @@ Function DownloadBinaryFile(URL As String, FilePath As String) As Boolean
 errHandler:
     DownloadBinaryFile = False
 End Function
+
 
 
 

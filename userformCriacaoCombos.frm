@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformCriacaoCombos 
    Caption         =   "Combos BOIBRABO"
-   ClientHeight    =   10860
+   ClientHeight    =   11205
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   19860
@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+Public DataSelecionada As Date
 
 
 
@@ -52,6 +54,11 @@ Dim varAvulsos As Variant
 
     status = InputBox("Insira o status (nao pode estar vazio, caso contrario cancelara a operacao)", "Status")
     observacao = InputBox("Insira o intervalo de peso da peca principal (nao pode estar vazio, caso contrario cancelara a operacao)", "Intervalo de peso")
+    
+    userformDataUso.Show
+    data_uso = userformDataUso.button_calendario.Caption
+    If data_uso = "Calendario" Then data_uso = ""
+    
     If status = "" Then Exit Sub
     If observacao = "" Then Exit Sub
 
@@ -73,7 +80,7 @@ If listCombos.ListCount = 1 Then
     Avulsos.Cells(last_row_avulso, 5) = varAvulsos(1, 6)
     Avulsos.Cells(last_row_avulso, 6) = CDbl(textbox_venda)
     Avulsos.Cells(last_row_avulso, 7) = Date
-    Avulsos.Cells(last_row_avulso, 8) = ""
+    Avulsos.Cells(last_row_avulso, 8) = data_uso
     Avulsos.Cells(last_row_avulso, 9) = status
     Avulsos.Cells(last_row_avulso, 10) = observacao
     
@@ -109,7 +116,7 @@ Else
     Combos.Cells(last_row_combos, 4) = CDbl(label_custo)
     Combos.Cells(last_row_combos, 5) = CDbl(textbox_venda)
     Combos.Cells(last_row_combos, 6) = Date
-    Combos.Cells(last_row_combos, 7) = ""
+    Combos.Cells(last_row_combos, 7) = data_uso
     Combos.Cells(last_row_combos, 8) = status
     Combos.Cells(last_row_combos, 9) = observacao
 
@@ -162,7 +169,7 @@ Private Sub listProdutos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 
     lista_index_produto = listProdutos.ListIndex
     
-    ' Verifica se há um item selecionado
+    ' Verifica se h?m item selecionado
     If lista_index_produto = -1 Then Exit Sub
     
     last_row = Produtos.Range("u1").CurrentRegion.Rows.Count + 1
@@ -273,7 +280,7 @@ Call calcularVenda
 End Sub
 
 Private Sub textbox_venda_Change()
-    On Error Resume Next ' Ignora erros e continua a execução
+    On Error Resume Next ' Ignora erros e continua a execu?
 
     If Val(textbox_venda) = 0 Then Exit Sub
 
@@ -314,7 +321,7 @@ Else
     Set rg = rg.Offset(1).Resize(rg.Rows.Count - 1)
 End If
 
-' Configura o ListBox do cabeçalho
+' Configura o ListBox do cabe?ho
     listCombos.ColumnCount = rg.Columns.Count
     listCombos.RowSource = rg.Address(external:=True)
     listCombos.ColumnHeads = True
@@ -339,4 +346,5 @@ End With
 
 
 End Sub
+
 

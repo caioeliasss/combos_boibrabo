@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -64,7 +65,7 @@ End Sub
 Private Sub button_clonar_Click()
     
     If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("Est√° op√ß√£o s√≥ √© valida para os combos")
+        MsgBox ("Est· opÁ„o sÛ È valida para os combos")
         Exit Sub
     End If
     
@@ -119,10 +120,9 @@ Private Sub button_gerarPDF_Click()
                                 Filename:=caminho & nomeArquivo, _
                                 Quality:=xlQualityStandard, _
                                 IncludeDocProperties:=True, _
-                                IgnorePrintAreas:=False, _
-                                OpenAfterPublish:=True
+                                IgnorePrintAreas:=False
         
-        ' Mensagem de confirma√ß√£o
+        ' Mensagem de confirmaÁ„o
         Descritivo.Range("h1").ClearContents
         Descritivo.Range("h2").ClearContents
         
@@ -147,6 +147,10 @@ Private Sub button_limparCalendario_Click()
 End Sub
 
 
+
+Private Sub combobox_ordenar_Change()
+    Call feedCombos
+End Sub
 
 Private Sub list_combos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     If toggle_avulso.Caption = "Combos" Then
@@ -218,17 +222,37 @@ End Sub
 
 Private Sub UserForm_Initialize()
     Call feedCombos
+    Call feedOrdenar
 End Sub
 
+Private Sub feedOrdenar()
+    
+    With combobox_ordenar
+        .AddItem "Produtos"
+        .AddItem "Produto ID"
+        .AddItem "Custo"
+        .AddItem "Venda"
+        .AddItem "Data criacao"
+        .AddItem "Data uso"
+        .AddItem "Status"
+        .AddItem "Intervalo"
+    End With
+    
+    combobox_ordenar.ListIndex = 3
+
+End Sub
 
 Private Sub feedCombos()
     Dim Data As String
     Dim rg As Range
+    Dim ordem As Integer
     
     Data = button_calendario.Caption
     If button_calendario.Caption = "Calendario" Then Data = ""
     
-    Set rg = getRangeCombos(textbox_itens, Data)
+    ordem = combobox_ordenar.ListIndex + 2
+    
+    Set rg = getRangeCombos(textbox_itens, Data, ordem)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
@@ -259,4 +283,5 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 

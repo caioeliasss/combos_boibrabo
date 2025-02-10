@@ -205,7 +205,7 @@ rg.Sort Key1:=rg.Columns(7), Order1:=xlDescending, Header:=xlNo
 Set getRangeAvulsos = rg
 
 End Function
-Public Function getRangeCombos(pesquisa_produto As String, dataUso As String) As Range
+Public Function getRangeCombos(pesquisa_produto As String, dataUso As String, ordem As Integer) As Range
 Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
@@ -252,7 +252,7 @@ End If
 
 Set rg = Combos.Range("AA2").CurrentRegion
 Set rg = rg.Offset(1).Resize(rg.Rows.Count - 1)
-rg.Sort Key1:=rg.Columns(6), Order1:=xlDescending, Header:=xlNo
+rg.Sort Key1:=rg.Columns(ordem), Order1:=xlDescending, Header:=xlNo
 
 Set getRangeCombos = rg
 
@@ -435,4 +435,5 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
