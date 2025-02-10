@@ -112,7 +112,7 @@ Private Sub button_gerarPDF_Click()
         Descritivo.PageSetup.PrintArea = rng.Address
 
         ' Definir caminho e nome do arquivo
-        caminho = ThisWorkbook.Path & "\pdf\"
+        caminho = ThisWorkbook.Path & "\"
         nomeArquivo = "Descritivo " & Format(CDate(button_calendario.Caption), "dd-mm-yyyy") & ".pdf"
         
         Descritivo.PageSetup.Orientation = xlLandscape
