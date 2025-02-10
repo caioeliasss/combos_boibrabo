@@ -2,7 +2,11 @@ Attribute VB_Name = "modRange"
 Public Sub setHeaders()
     
     Produtos.Range("w1").Value = "Un."
-
+    Produtos.Visible = xlSheetHidden
+    Combos.Visible = xlSheetHidden
+    ProdutosCombo.Visible = xlSheetHidden
+    Avulsos.Visible = xlSheetHidden
+    Descritivo.Visible = xlSheetHidden
 
 End Sub
 
