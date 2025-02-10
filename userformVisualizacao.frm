@@ -102,6 +102,8 @@ Private Sub button_gerarPDF_Click()
         Dim caminho As String
         Dim nomeArquivo As String
         
+        Descritivo.Range("h1").Value = "Data de uso"
+        Descritivo.Range("h2").Value = Format(Now, "dd/mm/yyyy")
         ' Definir a planilha e o intervalo
         Set rng = Descritivo.Range("A1").CurrentRegion
         Set rng = rng.Offset(, 1).Resize(, rng.Columns.Count - 1)
@@ -121,6 +123,9 @@ Private Sub button_gerarPDF_Click()
                                 OpenAfterPublish:=True
         
         ' Mensagem de confirmação
+        Descritivo.Range("h1").ClearContents
+        Descritivo.Range("h2").ClearContents
+        
         MsgBox "PDF salvo", vbInformation, "Sucesso"
         
     End If
