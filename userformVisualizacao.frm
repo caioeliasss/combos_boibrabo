@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -63,7 +64,7 @@ End Sub
 Private Sub button_clonar_Click()
     
     If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("EstÃ¡ opÃ§Ã£o sÃ³ Ã© valida para os combos")
+        MsgBox ("Está opção só é valida para os combos")
         Exit Sub
     End If
     
@@ -91,6 +92,41 @@ Private Sub button_consultar_Click()
     End If
 End Sub
 
+Private Sub button_gerarPDF_Click()
+    If toggle_descritivo.Caption <> "On" Then
+        MsgBox ("Somente gera PDF no modo descritivo")
+        Exit Sub
+    Else
+    
+        Dim rng As Range
+        Dim caminho As String
+        Dim nomeArquivo As String
+        
+        ' Definir a planilha e o intervalo
+        Set rng = Descritivo.Range("A1").CurrentRegion
+        Set rng = rng.Offset(, 1).Resize(, rng.Columns.Count - 1)
+        
+        ' Definir caminho e nome do arquivo
+        caminho = ThisWorkbook.Path & "\"
+        nomeArquivo = "Descritivo_" & Format(Now, "dd_mm_yyyy-hh_mm_ss") & ".pdf"
+        
+        Descritivo.PageSetup.Orientation = xlLandscape
+        
+        ' Exportar como PDF
+        rng.ExportAsFixedFormat Type:=xlTypePDF, _
+                                Filename:=caminho & nomeArquivo, _
+                                Quality:=xlQualityStandard, _
+                                IncludeDocProperties:=True, _
+                                IgnorePrintAreas:=False, _
+                                OpenAfterPublish:=True
+        
+        ' Mensagem de confirmação
+        MsgBox "PDF salvo", vbInformation, "Sucesso"
+        
+    End If
+
+End Sub
+
 Private Sub button_gotoCombos_Click()
     Me.Hide
     userformCriacaoCombos.Show
@@ -110,7 +146,7 @@ End Sub
 Private Sub list_combos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     If toggle_avulso.Caption = "Combos" Then
         userformAlterarCombo.Show
-        Call feedCombos
+        'Call feedCombos
     Else
         userformAlterarAvulso.Show
         Call feedAvulsos
@@ -144,16 +180,16 @@ Private Sub toggle_descritivo_Click()
 End Sub
 
 Private Sub feedDescritivo()
-    Dim data As Date
+    Dim Data As Date
     Dim rg As Range
     
     If button_calendario.Caption = "Calendario" Then
         button_calendario_Click
     End If
     
-    data = CDate(button_calendario.Caption)
+    Data = CDate(button_calendario.Caption)
     
-    Set rg = getRangeDescritivo(data)
+    Set rg = getRangeDescritivo(Data)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
@@ -181,13 +217,13 @@ End Sub
 
 
 Private Sub feedCombos()
-    Dim data As String
+    Dim Data As String
     Dim rg As Range
     
-    data = button_calendario.Caption
-    If button_calendario.Caption = "Calendario" Then data = ""
+    Data = button_calendario.Caption
+    If button_calendario.Caption = "Calendario" Then Data = ""
     
-    Set rg = getRangeCombos(textbox_itens, data)
+    Set rg = getRangeCombos(textbox_itens, Data)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
@@ -200,13 +236,13 @@ Private Sub feedCombos()
 
 End Sub
 Private Sub feedAvulsos()
-    Dim data As String
+    Dim Data As String
     Dim rg As Range
     
-    data = button_calendario.Caption
-    If button_calendario.Caption = "Calendario" Then data = ""
+    Data = button_calendario.Caption
+    If button_calendario.Caption = "Calendario" Then Data = ""
     
-    Set rg = getRangeAvulsos(textbox_itens, data)
+    Set rg = getRangeAvulsos(textbox_itens, Data)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
@@ -218,3 +254,4 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+

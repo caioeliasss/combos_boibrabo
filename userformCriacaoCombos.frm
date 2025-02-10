@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_editarPeso_Click()
 
 Dim id As String
@@ -161,7 +162,7 @@ Private Sub listProdutos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 
     lista_index_produto = listProdutos.ListIndex
     
-    ' Verifica se h√° um item selecionado
+    ' Verifica se h· um item selecionado
     If lista_index_produto = -1 Then Exit Sub
     
     last_row = Produtos.Range("u1").CurrentRegion.Rows.Count + 1
@@ -272,7 +273,7 @@ Call calcularVenda
 End Sub
 
 Private Sub textbox_venda_Change()
-    On Error Resume Next ' Ignora erros e continua a execu√ß√£o
+    On Error Resume Next ' Ignora erros e continua a execuÁ„o
 
     If Val(textbox_venda) = 0 Then Exit Sub
 
@@ -313,7 +314,7 @@ Else
     Set rg = rg.Offset(1).Resize(rg.Rows.Count - 1)
 End If
 
-' Configura o ListBox do cabe√ßalho
+' Configura o ListBox do cabeÁalho
     listCombos.ColumnCount = rg.Columns.Count
     listCombos.RowSource = rg.Address(external:=True)
     listCombos.ColumnHeads = True
@@ -338,3 +339,4 @@ End With
 
 
 End Sub
+

@@ -94,6 +94,8 @@ For j = 1 To UBound(comboVar)
             count_ = count_ + 1
         End If
     Next i
+    filteredVar(count_, 1) = "-"
+    count_ = count_ + 1
 Next j
 
 var = Avulsos.Range("a1").CurrentRegion
@@ -116,7 +118,7 @@ For i = 1 To UBound(avulsoVar)
     If avulsoVar(i, 1) <> "" Then
         filteredVar(count_, 1) = "-----------------------"
         filteredVar(count_, 2) = "------------------------------------------"
-        filteredVar(count_, 3) = "Avulso " & count_2 & " | Valor: " & avulsoVar(i, 6)
+        filteredVar(count_, 3) = "AVULSO " & count_2 & " | Valor: " & avulsoVar(i, 6)
         filteredVar(count_, 4) = "------------------------------------------"
         filteredVar(count_, 5) = "------------------------------------------"
         filteredVar(count_, 6) = "------------------------------------------"
@@ -429,3 +431,4 @@ Private Sub apagarVestigios()
 
 
 End Sub
+

@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformAlterarCombo 
    Caption         =   "Modificar"
-   ClientHeight    =   8370.001
+   ClientHeight    =   8580.001
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   12105
@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Public custo As Double
 Private Sub button_calendario_Click()
     Calendario.Show
     button_calendario.Caption = Calendario.labelDataSelecionada
@@ -69,21 +70,21 @@ End Sub
 
 Private Sub button_salvar_Click()
 Dim id As String
-Dim data As String
+Dim Data As String
 Dim status As String
 Dim obs As String
 
     lista_index = userformVisualizacao.list_combos.ListIndex
     id = userformVisualizacao.list_combos.List(lista_index, 0)
-    data = button_calendario.Caption
-    If data = "Calendario" Then data = ""
+    Data = button_calendario.Caption
+    If Data = "Calendario" Then Data = ""
     status = textbox_status
     obs = textbox_observacao
     
-    If data = "" Then
-        Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 7, data)
+    If Data = "" Then
+        Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 7, Data)
     Else
-        Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 7, CDate(data))
+        Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 7, CDate(Data))
     End If
     
     Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 8, status)
@@ -135,6 +136,14 @@ Call updateDatabaseEspecial(ProdutosCombo.Range("a1").CurrentRegion, ProdutosCom
 Call feedProdutos
 End Sub
 
+
+
+Private Sub textbox_precoVenda_Change()
+    On Error Resume Next
+    label_porcentagem = Round((textbox_precoVenda.Value / custo * 100) - 100, 1)
+    On Error GoTo 0
+End Sub
+
 Private Sub UserForm_Initialize()
 
     Call feedProdutos
@@ -150,10 +159,10 @@ Private Sub isDateUsed()
     
     id = userformVisualizacao.list_combos.List(lista_index, 0)
     
-    data = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 7)
-    If data = "" Then
+    Data = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 7)
+    If Data = "" Then
     Else
-        userformAlterarCombo.button_calendario.Caption = data
+        userformAlterarCombo.button_calendario.Caption = Data
     End If
     
 
@@ -177,9 +186,15 @@ Private Sub feedProdutos()
         .ListIndex = 0
     End With
     
+    custo = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 4)
+    
     textbox_precoVenda = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 5)
     textbox_status = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 8)
     textbox_observacao = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 9)
+    label_porcentagem = Round((textbox_precoVenda.Value / custo) - 1, 1)
+    
     
 
 End Sub
+
+
