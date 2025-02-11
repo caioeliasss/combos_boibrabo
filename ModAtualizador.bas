@@ -58,11 +58,12 @@ Sub AtualizarVBA()
         
         Set vbProj = ThisWorkbook.VBProject
         On Error Resume Next
-        Do
+        'Do
             vbProj.VBComponents.Remove vbProj.VBComponents(NomeModulo)
             DoEvents
+            ThisWorkbook.Save
             Application.Wait Now + TimeValue("00:00:01") ' Aguarda 1 segundo
-        Loop Until vbProj.VBComponents(NomeModulo) Is Nothing
+        'Loop Until vbProj.VBComponents(NomeModulo) Is Nothing
         On Error GoTo 0
         
         Set vbComp = vbProj.VBComponents.Import(CaminhoModulo)
