@@ -58,10 +58,12 @@ Sub AtualizarVBA()
         
         Set vbProj = ThisWorkbook.VBProject
         On Error Resume Next
-        vbProj.VBComponents.Remove vbProj.VBComponents(NomeModulo)
+        Do
+            vbProj.VBComponents.Remove vbProj.VBComponents(NomeModulo)
+            DoEvents
+            Application.Wait Now + TimeValue("00:00:01") ' Aguarda 1 segundo
+        Loop Until vbProj.VBComponents(NomeModulo) Is Nothing
         On Error GoTo 0
-        
-        DoEvents
         
         Set vbComp = vbProj.VBComponents.Import(CaminhoModulo)
         vbComp.Name = NomeModulo
@@ -102,11 +104,14 @@ Sub AtualizarVBA()
         End If
         
         Set vbProj = ThisWorkbook.VBProject
-        On Error Resume Next
-        vbProj.VBComponents.Remove vbProj.VBComponents(NomeUserForm)
-        On Error GoTo 0
         
-        DoEvents
+        On Error Resume Next
+        Do
+            vbProj.VBComponents.Remove vbProj.VBComponents(NomeUserForm)
+            DoEvents
+            Application.Wait Now + TimeValue("00:00:01") ' Aguarda 1 segundo
+        Loop Until vbProj.VBComponents(NomeModulo) Is Nothing
+        On Error GoTo 0
         
         ' Importar o UserForm (o VBA automaticamente procurar? .frx correspondente no mesmo diret?)
         On Error Resume Next
