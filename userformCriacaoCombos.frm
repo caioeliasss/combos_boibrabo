@@ -6,6 +6,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformCriacaoCombos
    ClientTop       =   465
    ClientWidth     =   19860
    OleObjectBlob   =   "userformCriacaoCombos.frx":0000
+   ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
 End
 Attribute VB_Name = "userformCriacaoCombos"
@@ -13,6 +14,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 
 
 Public DataSelecionada As Date
@@ -350,6 +352,7 @@ End With
 
 
 End Sub
+
 
 
 

@@ -6,6 +6,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformDataUso
    ClientTop       =   465
    ClientWidth     =   4200
    OleObjectBlob   =   "userformDataUso.frx":0000
+   ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
 End
 Attribute VB_Name = "userformDataUso"
@@ -13,6 +14,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub button_calendario_Click()
     Calendario.Show
     button_calendario.Caption = Calendario.labelDataSelecionada
@@ -29,3 +31,4 @@ Private Sub UserForm_Initialize()
     button_calendario.Caption = "Calendario"
     
 End Sub
+

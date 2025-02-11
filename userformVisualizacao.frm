@@ -6,6 +6,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformVisualizacao
    ClientTop       =   465
    ClientWidth     =   17505
    OleObjectBlob   =   "userformVisualizacao.frx":0000
+   ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
 End
 Attribute VB_Name = "userformVisualizacao"
@@ -13,6 +14,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 
 
 
@@ -72,7 +74,7 @@ End Sub
 Private Sub button_clonar_Click()
     
     If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("Está opção só é valida para os combos")
+        MsgBox ("Est?p? s?valida para os combos")
         Exit Sub
     End If
     
@@ -137,7 +139,7 @@ Private Sub button_gerarPDF_Click()
                                 IncludeDocProperties:=True, _
                                 IgnorePrintAreas:=False
         
-        ' Mensagem de confirmação
+        ' Mensagem de confirma?
         Descritivo.Range("h1").ClearContents
         Descritivo.Range("h2").ClearContents
         Descritivo.Visible = xlSheetHidden
@@ -298,6 +300,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 
