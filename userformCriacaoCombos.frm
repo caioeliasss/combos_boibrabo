@@ -192,9 +192,9 @@ End Sub
 Private Sub calcularVenda()
 On Error Resume Next
 
-porcentagem = (textbox_porcentagem + 100) * 0.01
+porcentagem = 1 - ((textbox_porcentagem) * 0.01)
 
-textbox_venda = porcentagem * label_custo
+textbox_venda = label_custo / porcentagem
 
 On Error GoTo 0
 End Sub
