@@ -20,8 +20,7 @@ Sub AtualizarVBA()
     ' Array de m?os para atualizar
     modArray = Array( _
         Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/modDatabase.bas", "modDatabase"), _
-        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/modRange.bas", "modRange"), _
-        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/ModPatcher.bas", "ModPatcher"))
+        Array("https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/modRange.bas", "modRange"))
     
     ' Array de UserForms para atualizar (incluindo URLs para .frm e .frx)
     userformArray = Array( _
