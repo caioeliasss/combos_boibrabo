@@ -284,7 +284,7 @@ Private Sub textbox_venda_Change()
 
     If Val(textbox_venda) = 0 Then Exit Sub
 
-    label_porcentagem = Val((Val(textbox_venda) / Val(label_custo) - 1) * 100)
+    label_porcentagem = Val(1 -(Val(label_custo) / Val(textbox_venda)) * 100)
     label_lucro = Val(textbox_venda) - Val(label_custo)
 
     On Error GoTo 0 ' Desativa o tratamento de erro para evitar ignorar outros erros inesperados
