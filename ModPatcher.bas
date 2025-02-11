@@ -11,25 +11,25 @@ Sub downloadPatcher()
     ' URL do arquivo RAW no GitHub
     URLModulo = "https://raw.githubusercontent.com/caioeliasss/combos_boibrabo/main/ModAtualizador.bas"
 
-    ' Caminho tempor醨io para salvar o novo c骴igo
+    ' Caminho tempor谩rio para salvar o novo c贸digo
     CaminhoModulo = Environ("TEMP") & "\ModAtualizador.bas"
 
-    ' Criar objeto HTTP para baixar o novo c骴igo
+    ' Criar objeto HTTP para baixar o novo c贸digo
     Set http = CreateObject("MSXML2.XMLHTTP")
     http.Open "GET", URLModulo, False
     http.Send
 
-    ' Se o download foi bem-sucedido, pegar o conte鷇o como texto
+    ' Se o download foi bem-sucedido, pegar o conte煤do como texto
     If http.status = 200 Then
         texto = http.responseText
     Else
-        MsgBox "Erro ao baixar o c骴igo atualizado.", vbCritical
+        MsgBox "Erro ao baixar o c贸digo atualizado.", vbCritical
         Exit Sub
     End If
 
-    ' Lendo o conte鷇o do arquivo para garantir a codifica玢o correta
-    ' Limpar quaisquer caracteres que possam ser invis韛eis ou indesejados
-    texto = Mid(texto, InStr(texto, "Sub ")) ' Ajuste para garantir que come鏰 na primeira Sub
+    ' Lendo o conte煤do do arquivo para garantir a codifica莽茫o correta
+    ' Limpar quaisquer caracteres que possam ser invis铆veis ou indesejados
+    texto = Mid(texto, InStr(texto, "Sub ")) ' Ajuste para garantir que come莽a na primeira Sub
 
     ' Salvar o arquivo limpo novamente
     fileNum = FreeFile
@@ -37,21 +37,25 @@ Sub downloadPatcher()
     Print #fileNum, texto
     Close #fileNum
 
-    ' Refer阯cia ao projeto VBA
+    ' Refer锚ncia ao projeto VBA
     Set vbProj = ThisWorkbook.VBProject
 
-    ' Remover o m骴ulo antigo
+    ' Remover o m贸dulo antigo
     On Error Resume Next
-    vbProj.VBComponents.Remove vbProj.VBComponents("ModAtualizador")
+    Do
+        vbProj.VBComponents.Remove vbProj.VBComponents("ModAtualizador")
+        DoEvents
+        Application.Wait Now + TimeValue("00:00:01") ' Aguarda 1 segundo
+    Loop Until vbProj.VBComponents("ModAtualizador") Is Nothing
     On Error GoTo 0
 
-    ' Importar o m骴ulo atualizado
+    ' Importar o m贸dulo atualizado
     Set vbComp = vbProj.VBComponents.Import(CaminhoModulo)
 
-    ' Renomear o m骴ulo importado
-    vbComp.Name = "ModAtualizador" ' Define o nome do m骴ulo corretamente
+    ' Renomear o m贸dulo importado
+    vbComp.Name = "ModAtualizador" ' Define o nome do m贸dulo corretamente
 
-    ' Fechar e reabrir o Excel automaticamente para aplicar as mudan鏰s
+    ' Fechar e reabrir o Excel automaticamente para aplicar as mudan莽as
     ThisWorkbook.Save
     'Application.Quit
 End Sub
