@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformCriacaoCombos 
    Caption         =   "Combos BOIBRABO"
-   ClientHeight    =   11205
+   ClientHeight    =   11415
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   19860
@@ -41,6 +41,11 @@ End Sub
 
 
 Private Sub button_gotoVisualizacao_Click()
+    Me.Hide
+    userformVisualizacao.Show
+End Sub
+
+Private Sub button_proximaPag_Click()
     Me.Hide
     userformVisualizacao.Show
 End Sub
