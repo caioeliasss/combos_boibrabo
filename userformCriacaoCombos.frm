@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public DataSelecionada As Date
 
 
@@ -357,6 +358,7 @@ End With
 
 
 End Sub
+
 
 
 

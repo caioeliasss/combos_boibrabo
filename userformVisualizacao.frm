@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformVisualizacao 
    Caption         =   "Visualizar"
-   ClientHeight    =   12405
+   ClientHeight    =   12615
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   17505
@@ -14,6 +14,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 
 
 
@@ -165,6 +166,11 @@ End Sub
 
 
 
+Private Sub button_pagAnterior_Click()
+    Me.Hide
+    userformCriacaoCombos.Show
+End Sub
+
 Private Sub combobox_ordenar_Change()
     Call feedCombos
 End Sub
@@ -300,6 +306,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 
