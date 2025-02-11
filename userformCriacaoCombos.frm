@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Public DataSelecionada As Date
 
 
@@ -54,9 +55,10 @@ Dim varAvulsos As Variant
 
     status = InputBox("Insira o status (nao pode estar vazio, caso contrario cancelara a operacao)", "Status")
     observacao = InputBox("Insira o intervalo de peso da peca principal (nao pode estar vazio, caso contrario cancelara a operacao)", "Intervalo de peso")
+    comentario = InputBox("Insira um comentario (opcional)", "Comentarios")
     
     userformDataUso.Show
-    data_uso = userformDataUso.button_calendario.Caption
+    data_uso = CDate(userformDataUso.button_calendario.Caption)
     If data_uso = "Calendario" Then data_uso = ""
     
     If status = "" Then Exit Sub
@@ -83,6 +85,7 @@ If listCombos.ListCount = 1 Then
     Avulsos.Cells(last_row_avulso, 8) = data_uso
     Avulsos.Cells(last_row_avulso, 9) = status
     Avulsos.Cells(last_row_avulso, 10) = observacao
+    Avulsos.Cells(last_row_avulso, 11) = comentario
     
 Else
 
@@ -119,6 +122,7 @@ Else
     Combos.Cells(last_row_combos, 7) = data_uso
     Combos.Cells(last_row_combos, 8) = status
     Combos.Cells(last_row_combos, 9) = observacao
+    Combos.Cells(last_row_combos, 10) = comentario
 
 End If
 
@@ -346,5 +350,6 @@ End With
 
 
 End Sub
+
 
 

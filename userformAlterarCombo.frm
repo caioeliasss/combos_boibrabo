@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformAlterarCombo 
    Caption         =   "Modificar"
-   ClientHeight    =   8580.001
+   ClientHeight    =   9075.001
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   12105
@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Public custo As Double
 Private Sub button_calendario_Click()
     Calendario.Show
@@ -91,6 +92,7 @@ Dim obs As String
     Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 9, obs)
     Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 4, totalizadorCusto)
     Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 5, textbox_precoVenda)
+    Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 10, textbox_comentario)
     
     
     Unload Me
@@ -106,6 +108,8 @@ End Sub
 Private Sub button_salvar_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 
 End Sub
+
+
 
 
 
@@ -192,9 +196,10 @@ Private Sub feedProdutos()
     textbox_status = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 8)
     textbox_observacao = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 9)
     label_porcentagem = Round((textbox_precoVenda.Value / custo) - 1, 1)
-    
-    
+    textbox_comentario = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 10)
+     
 
 End Sub
+
 
 

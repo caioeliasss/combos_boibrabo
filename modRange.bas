@@ -2,6 +2,12 @@ Attribute VB_Name = "modRange"
 Public Sub setHeaders()
     
     Produtos.Range("w1").Value = "Un."
+    Combos.Range("j1").Value = "Comentarios"
+    Combos.Range("aj1").Value = "Comentarios"
+    
+    Avulsos.Range("k1").Value = "Comentarios"
+    Avulsos.Range("ak1").Value = "Comentarios"
+    
     Produtos.Visible = xlSheetHidden
     Combos.Visible = xlSheetHidden
     ProdutosCombo.Visible = xlSheetHidden
@@ -50,7 +56,7 @@ Next i
 
 End Sub
 
-Public Function getRangeDescritivo(dia As Date) As Range
+Public Function getRangeDescritivo(dia As Date, filtro_status As String) As Range
 Dim rg As Range
 Dim var As Variant
 Dim comboVar As Variant
@@ -59,17 +65,21 @@ Dim var2 As Variant
 Dim filteredVar As Variant
 ReDim filteredVar(1 To 1000, 1 To 15)
 ReDim comboVar(1 To 500, 1 To 15)
-ReDim avulsoVar(1 To 500, 1 To 10)
+ReDim avulsoVar(1 To 500, 1 To 11)
 
 Descritivo.Range("a2:h1000").ClearContents
 
-set rg = Combos.Range("a1").CurrentRegion
+Set rg = Combos.Range("a1").CurrentRegion
 rg.Sort Key1:=rg.Columns(5), Order1:=xlDescending, Header:=xlNo
 var = rg
 count_ = 1
+
+If filtro_status = "" Then IsEmpty_filtro_status = True
+
 For i = 1 To UBound(var)
+    If IsEmpty_filtro_status Then filtro_status = var(i, 10)
     
-    If var(i, 7) = dia Then
+    If var(i, 7) = dia And InStr(1, UCase(var(i, 10)), UCase(filtro_status), vbTextCompare) > 0 Then
         For col = 1 To UBound(var, 2)
             comboVar(count_, col) = var(i, col)
         Next col
@@ -83,17 +93,19 @@ count_2 = 1
 
 For j = 1 To UBound(comboVar)
     If comboVar(j, 1) <> "" Then
-        filteredVar(count_, 1) = "-----------------------"
-        filteredVar(count_, 2) = "------------------------------------------"
+        filteredVar(count_, 1) = String(50, "-")
+        filteredVar(count_, 2) = String(50, "-")
         filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: " & comboVar(j, 5)
-        filteredVar(count_, 4) = "------------------------------------------"
-        filteredVar(count_, 5) = "------------------------------------------"
-        filteredVar(count_, 6) = "------------------------------------------"
-        filteredVar(count_, 7) = "------------------------------------------------------------------------------"
+        filteredVar(count_, 4) = String(50, "-")
+        filteredVar(count_, 5) = String(50, "-")
+        filteredVar(count_, 6) = String(50, "-")
+        filteredVar(count_, 7) = String(50, "-")
         count_ = count_ + 1
         filteredVar(count_, 3) = "Status: " & comboVar(j, 8)
         count_ = count_ + 1
         filteredVar(count_, 3) = "Intervalo: " & comboVar(j, 9)
+        count_ = count_ + 1
+        filteredVar(count_, 3) = "Comentario: " & comboVar(j, 10)
         count_ = count_ + 1
         count_2 = count_2 + 1
     Else: Exit For
@@ -132,13 +144,19 @@ count_2 = 1
 
 For i = 1 To UBound(avulsoVar)
     If avulsoVar(i, 1) <> "" Then
-        filteredVar(count_, 1) = "-----------------------"
-        filteredVar(count_, 2) = "------------------------------------------"
+        filteredVar(count_, 1) = String(50, "-")
+        filteredVar(count_, 2) = String(50, "-")
         filteredVar(count_, 3) = "AVULSO " & count_2 & " | Valor: " & avulsoVar(i, 6)
-        filteredVar(count_, 4) = "------------------------------------------"
-        filteredVar(count_, 5) = "------------------------------------------"
-        filteredVar(count_, 6) = "------------------------------------------"
-        filteredVar(count_, 7) = "------------------------------------------------------------------------------"
+        filteredVar(count_, 4) = String(50, "-")
+        filteredVar(count_, 5) = String(50, "-")
+        filteredVar(count_, 6) = String(50, "-")
+        filteredVar(count_, 7) = String(50, "-")
+        count_ = count_ + 1
+        filteredVar(count_, 3) = "Status: " & avulsoVar(j, 9)
+        count_ = count_ + 1
+        filteredVar(count_, 3) = "Intervalo: " & avulsoVar(j, 10)
+        count_ = count_ + 1
+        filteredVar(count_, 3) = "Comentario: " & avulsoVar(j, 11)
         count_ = count_ + 1
         count_2 = count_2 + 1
         For col = 1 To 3
@@ -207,7 +225,7 @@ Next i
 If filteredVar(1, 1) = "" Then
     Avulsos.Range("AA2").Value = "Nada encontrado"
 Else
-    Avulsos.Range("AA2", Cells(count_, 36).Address).Value = filteredVar
+    Avulsos.Range("AA2", Cells(count_, 37).Address).Value = filteredVar
 End If
 
 Set rg = Avulsos.Range("AA2").CurrentRegion
@@ -259,7 +277,7 @@ Next i
 If filteredVar(1, 1) = "" Then
     Combos.Range("AA2").Value = "Nada encontrado"
 Else
-    Combos.Range("AA2", Cells(count_, 35).Address).Value = filteredVar
+    Combos.Range("AA2", Cells(count_, 36).Address).Value = filteredVar
 End If
 
 Set rg = Combos.Range("AA2").CurrentRegion
@@ -447,5 +465,6 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
 

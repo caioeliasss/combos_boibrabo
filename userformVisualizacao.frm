@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -55,17 +56,23 @@ End Sub
 Private Sub button_calendario_Click()
     Calendario.Show
     button_calendario.Caption = Calendario.labelDataSelecionada
-    If toggle_avulso.Caption = "Combos" Then
-        Call feedCombos
+    If toggle_descritivo.Caption = "On" Then
+        Call feedDescritivo
     Else
-        Call feedAvulsos
+    
+        If toggle_avulso.Caption = "Combos" Then
+            Call feedCombos
+        Else
+            Call feedAvulsos
+        End If
     End If
+    
 End Sub
 
 Private Sub button_clonar_Click()
     
     If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("Est√° op√ß√£o s√≥ √© valida para os combos")
+        MsgBox ("Est· opÁ„o sÛ È valida para os combos")
         Exit Sub
     End If
     
@@ -85,12 +92,18 @@ Private Sub button_clonar_Click()
 End Sub
 
 Private Sub button_consultar_Click()
-
-    If toggle_avulso.Caption = "Combos" Then
-        Call feedCombos
+    
+    If toggle_descritivo.Caption = "On" Then
+        Call feedDescritivo
     Else
-        Call feedAvulsos
+    
+        If toggle_avulso.Caption = "Combos" Then
+            Call feedCombos
+        Else
+            Call feedAvulsos
+        End If
     End If
+    
 End Sub
 
 Private Sub button_gerarPDF_Click()
@@ -124,7 +137,7 @@ Private Sub button_gerarPDF_Click()
                                 IncludeDocProperties:=True, _
                                 IgnorePrintAreas:=False
         
-        ' Mensagem de confirma√ß√£o
+        ' Mensagem de confirmaÁ„o
         Descritivo.Range("h1").ClearContents
         Descritivo.Range("h2").ClearContents
         Descritivo.Visible = xlSheetHidden
@@ -200,7 +213,7 @@ Private Sub feedDescritivo()
     
     Data = CDate(button_calendario.Caption)
     
-    Set rg = getRangeDescritivo(Data)
+    Set rg = getRangeDescritivo(Data, textbox_filtroStatus.Text)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
@@ -260,7 +273,7 @@ Private Sub feedCombos()
         .RowSource = rg.Address(external:=True)
         .ColumnCount = rg.Columns.Count
         .ColumnHeads = True
-        .ColumnWidths = "0;200;100;60;65;80;50;90;90"
+        .ColumnWidths = "0;200;0;60;65;80;50;90;90;100"
         .ListIndex = 0
     
     End With
@@ -285,5 +298,6 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 

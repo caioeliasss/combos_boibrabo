@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformAlterarAvulso 
    Caption         =   "Alterar avulso"
-   ClientHeight    =   6450
+   ClientHeight    =   7035
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   6795
@@ -15,6 +15,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Private Sub button_limparCalendario_Click()
     button_calendario.Caption = "Calendario"
 End Sub
@@ -26,21 +27,21 @@ End Sub
 
 Private Sub button_salvar_Click()
 Dim id As String
-Dim data As String
+Dim Data As String
 Dim status As String
 Dim obs As String
 
     lista_index = userformVisualizacao.list_combos.ListIndex
     id = userformVisualizacao.list_combos.List(lista_index, 0)
-    data = button_calendario.Caption
-    If data = "Calendario" Then data = ""
+    Data = button_calendario.Caption
+    If Data = "Calendario" Then Data = ""
     status = textbox_status
     obs = textbox_observacao
     
-    If data = "" Then
-        Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8, data)
+    If Data = "" Then
+        Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8, Data)
     Else
-        Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8, CDate(data))
+        Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8, CDate(Data))
     End If
     
     peso = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 5)
@@ -50,7 +51,7 @@ Dim obs As String
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6, textbox_precoVenda)
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 4, textbox_peso)
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 5, textbox_peso * peso)
-    
+    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 11, textbox_comentario)
     
     Unload Me
     
@@ -65,10 +66,10 @@ Private Sub isDateUsed()
     
     id = userformVisualizacao.list_combos.List(lista_index, 0)
     
-    data = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
-    If data = "" Then
+    Data = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
+    If Data = "" Then
     Else
-        button_calendario.Caption = data
+        button_calendario.Caption = Data
     End If
     
 
@@ -86,9 +87,12 @@ Private Sub feedProduto()
     textbox_status = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 9)
     textbox_observacao = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 10)
     textbox_peso = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 4)
+    textbox_comentario = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 11)
+    
 End Sub
 
 Private Sub UserForm_Initialize()
     Call isDateUsed
     Call feedProduto
 End Sub
+
