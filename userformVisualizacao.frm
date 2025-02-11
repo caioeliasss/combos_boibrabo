@@ -22,6 +22,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -307,6 +308,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 
