@@ -75,9 +75,13 @@ var = rg
 count_ = 1
 
 If filtro_status = "" Then IsEmpty_filtro_status = True
+If dia = "" Then IsEmpty_dataUso = True
 
 For i = 1 To UBound(var)
     If IsEmpty_filtro_status Then filtro_status = var(i, 8)
+    
+    If IsEmpty_dataUso Then dia = var(i, 7)
+    
     
     If var(i, 7) = dia And InStr(1, UCase(var(i, 8)), UCase(filtro_status), vbTextCompare) > 0 Then
         For col = 1 To UBound(var, 2)
@@ -235,7 +239,7 @@ rg.Sort Key1:=rg.Columns(7), Order1:=xlDescending, Header:=xlNo
 Set getRangeAvulsos = rg
 
 End Function
-Public Function getRangeCombos(pesquisa_produto As String, dataUso As String, ordem As Integer) As Range
+Public Function getRangeCombos(pesquisa_produto As String, dataUso As String, ordem As Integer, filtro_status As String) As Range
 Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
@@ -254,9 +258,15 @@ var = rg
 
 If pesquisa_produto = "" Then IsEmpty_pesquisaProduto = True
 If dataUso = "" Then IsEmpty_dataUso = True
+If filtro_status = "" Then IsEmpty_filtro_status = True
+
 count_ = 1
 
 For i = 1 To UBound(var)
+
+    If IsEmpty_filtro_status Then
+        filtro_status = var(i, 8)
+    End If
 
     If IsEmpty_pesquisaProduto Then
         pesquisa_produto = var(i, 2)
@@ -265,7 +275,7 @@ For i = 1 To UBound(var)
         dataUso = var(i, 7)
     End If
     
-    If InStr(1, var(i, 2), UCase(pesquisa_produto), vbTextCompare) > 0 And var(i, 7) = dataUso Then
+    If InStr(1, var(i, 2), UCase(pesquisa_produto), vbTextCompare) > 0 And var(i, 7) = dataUso And InStr(1, var(i, 8), UCase(filtro_status), vbTextCompare) > 0 Then
         For col = 1 To UBound(var, 2)
             filteredVar(count_, col) = var(i, col)
         Next col
@@ -465,6 +475,7 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
 
 
