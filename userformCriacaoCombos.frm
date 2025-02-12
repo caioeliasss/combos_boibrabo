@@ -67,8 +67,9 @@ Dim varAvulsos As Variant
     comentario = InputBox("Insira um comentario (opcional)", "Comentarios")
     
     userformDataUso.Show
-    data_uso = CDate(userformDataUso.button_calendario.Caption)
+    data_uso = userformDataUso.button_calendario.Caption
     If data_uso = "Calendario" Then data_uso = ""
+    If data_uso <> "Calendario" Then data_uso = CDate(data_uso)
     
     If status = "" Then Exit Sub
     If observacao = "" Then Exit Sub
