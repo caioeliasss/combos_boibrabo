@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformVisualizacao 
    Caption         =   "Visualizar"
-   ClientHeight    =   12615
+   ClientHeight    =   11700
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   17505
@@ -14,6 +14,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 
 
 
@@ -277,7 +278,7 @@ Private Sub feedCombos()
     
     ordem = combobox_ordenar.ListIndex + 2
     
-    Set rg = getRangeCombos(textbox_itens, Data, ordem,textbox_filtroStatus)
+    Set rg = getRangeCombos(textbox_itens, Data, ordem, textbox_filtroStatus)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
@@ -308,6 +309,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 
