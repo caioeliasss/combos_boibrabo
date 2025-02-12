@@ -24,6 +24,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -194,10 +195,14 @@ Private Sub feedDescritivo()
         .RowSource = rg.Address(external:=True)
         .ColumnCount = rg.Columns.Count
         .ColumnHeads = True
-        .ColumnWidths = "0;40;300;60;60;60;50"
+        .ColumnWidths = "0;40;300;30;150;150;50"
         .ListIndex = 0
     
     End With
+
+End Sub
+
+Private Sub list_descritivo_Click()
 
 End Sub
 
@@ -274,6 +279,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 

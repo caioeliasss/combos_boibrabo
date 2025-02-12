@@ -2,6 +2,7 @@ Attribute VB_Name = "modRange"
 Public Sub setHeaders()
     
     Produtos.Range("w1").Value = "Un."
+    Descritivo.Range("d1").Value = "Un."
     Combos.Range("j1").Value = "Comentarios"
     Combos.Range("aj1").Value = "Comentarios"
     
@@ -102,9 +103,9 @@ For j = 1 To UBound(comboVar)
         filteredVar(count_, 2) = String(100, "-")
         filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: R$" & comboVar(j, 5) & " | Data: " & comboVar(j, 7)
         filteredVar(count_, 4) = String(100, "-")
-        filteredVar(count_, 5) = String(100, "-")
-        filteredVar(count_, 6) = String(100, "-")
-        filteredVar(count_, 7) = String(100, "-")
+        filteredVar(count_, 5) = "Status: " & comboVar(j, 8)
+        filteredVar(count_, 6) = "Intervalo: " & comboVar(j, 9)
+        filteredVar(count_, 7) = "Comentario: " & comboVar(j, 10)
         count_ = count_ + 1
         For i = 1 To UBound(var)
             If var(i, 1) = comboVar(j, 1) Then
@@ -118,12 +119,7 @@ For j = 1 To UBound(comboVar)
                 count_ = count_ + 1
             End If
         Next i
-        filteredVar(count_, 3) = "Status: " & comboVar(j, 8)
-        count_ = count_ + 1
-        filteredVar(count_, 3) = "Intervalo: " & comboVar(j, 9)
-        count_ = count_ + 1
-        filteredVar(count_, 3) = "Comentario: " & comboVar(j, 10)
-        count_ = count_ + 1
+        
         count_2 = count_2 + 1
     Else: Exit For
     End If
