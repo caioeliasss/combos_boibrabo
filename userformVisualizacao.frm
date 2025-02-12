@@ -156,7 +156,9 @@ Private Sub button_pagAnterior_Click()
 End Sub
 
 Private Sub combobox_ordenar_Change()
+    Call feedAvulsos
     Call feedCombos
+    Call feedDescritivo
 End Sub
 
 Private Sub list_combos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
