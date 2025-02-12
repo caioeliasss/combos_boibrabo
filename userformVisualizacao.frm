@@ -180,7 +180,7 @@ End Sub
 Private Sub list_combos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     If toggle_avulso.Caption = "Combos" Then
         userformAlterarCombo.Show
-        'Call feedCombos
+        Call feedCombos
     Else
         userformAlterarAvulso.Show
         Call feedAvulsos
