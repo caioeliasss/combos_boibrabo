@@ -195,7 +195,7 @@ Private Sub listProdutos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     Produtos.Cells(last_row, 25) = listProdutos.List(lista_index_produto, 13)
     Produtos.Cells(last_row, 26) = Round(listProdutos.List(lista_index_produto, 3), 1) * listProdutos.List(lista_index_produto, 13)
     Produtos.Cells(last_row, 27) = Round(listProdutos.List(lista_index_produto, 5), 1)
-    Produtos.Cells(last_row, 28) = Round(listProdutos.List(lista_index_produto, 5), 1)
+    Produtos.Cells(last_row, 28) = Round(listProdutos.List(lista_index_produto, 5), 1) * listProdutos.List(lista_index_produto, 13)
     
     Call feedHeaderNew
     Call totalizadorCusto
