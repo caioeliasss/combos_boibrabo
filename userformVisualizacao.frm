@@ -277,7 +277,7 @@ Private Sub feedCombos()
     
     ordem = combobox_ordenar.ListIndex + 2
     
-    Set rg = getRangeCombos(textbox_itens, Data, ordem)
+    Set rg = getRangeCombos(textbox_itens, Data, ordem,textbox_filtroStatus)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
