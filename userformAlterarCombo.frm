@@ -16,6 +16,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 
+
 Public custo As Double
 Private Sub button_calendario_Click()
     Calendario.Show
@@ -145,10 +146,16 @@ End Sub
 
 
 Private Sub textbox_precoVenda_Change()
-    On Error Resume Next
-    label_porcentagem = Round((textbox_precoVenda.Value / custo * 100) - 100, 1)
-    On Error GoTo 0
+    label_porcentagem = calcularLucro
 End Sub
+
+Private Function calcularLucro()
+
+    On Error Resume Next
+    
+        calcularLucro = Round((1 - custo / textbox_precoVenda) * 100, 1)
+    On Error GoTo 0
+End Function
 
 Private Sub UserForm_Initialize()
 
@@ -197,11 +204,12 @@ Private Sub feedProdutos()
     textbox_precoVenda = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 5)
     textbox_status = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 8)
     textbox_observacao = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 9)
-    label_porcentagem = Round((textbox_precoVenda.Value / custo) - 1, 1)
+    label_porcentagem = calcularLucro
     textbox_comentario = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 10)
      
 
 End Sub
+
 
 
 
