@@ -157,6 +157,20 @@ Private Function calcularLucro()
     On Error GoTo 0
 End Function
 
+Private Function calcularCusto()
+    Dim var As Variant
+    
+    On Error Resume Next
+        var = list_produtosCombo.List
+        
+        For i = 0 To UBound(var)
+            soma = soma + var(i, 6)
+        Next i
+        
+        calcularCusto = Round(soma, 1)
+    On Error GoTo 0
+End Function
+
 Private Sub UserForm_Initialize()
 
     Call feedProdutos
@@ -199,8 +213,9 @@ Private Sub feedProdutos()
         .ListIndex = 0
     End With
     
-    custo = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 4)
+    custo = calcularCusto
     
+    textbox_custo = custo
     textbox_precoVenda = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 5)
     textbox_status = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 8)
     textbox_observacao = consultarDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 9)
