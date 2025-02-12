@@ -75,7 +75,7 @@ var = rg
 count_ = 1
 
 If filtro_status = "" Then IsEmpty_filtro_status = True
-If dia = "" Then IsEmpty_dataUso = True
+If dia = Empty Then IsEmpty_dataUso = True
 
 For i = 1 To UBound(var)
     If IsEmpty_filtro_status Then filtro_status = var(i, 8)
