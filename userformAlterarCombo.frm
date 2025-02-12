@@ -93,8 +93,8 @@ Dim obs As String
     
     Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 8, status)
     Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 9, obs)
-    Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 4, totalizadorCusto)
-    Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 5, textbox_precoVenda)
+    Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 4, CDbl(totalizadorCusto))
+    Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 5, CDbl(textbox_precoVenda))
     Call updateDatabase(Combos.Range("a1").CurrentRegion, Combos, 1, id, 10, textbox_comentario)
     
     
