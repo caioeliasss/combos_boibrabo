@@ -103,9 +103,9 @@ For j = 1 To UBound(comboVar)
         filteredVar(count_, 2) = String(100, "-")
         filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: R$" & comboVar(j, 5) & " | Data: " & comboVar(j, 7)
         filteredVar(count_, 4) = String(100, "-")
-        filteredVar(count_, 5) = "Status: " & comboVar(j, 8)
-        filteredVar(count_, 6) = "Interv.: " & comboVar(j, 9)
-        filteredVar(count_, 7) = "Coment.: " & comboVar(j, 10)
+        filteredVar(count_, 5) = "Stat: " & comboVar(j, 8)
+        filteredVar(count_, 6) = "Int.: " & comboVar(j, 9)
+        filteredVar(count_, 7) = "Com.: " & comboVar(j, 10)
         count_ = count_ + 1
         For i = 1 To UBound(var)
             If var(i, 1) = comboVar(j, 1) Then
@@ -149,19 +149,13 @@ count_2 = 1
 
 For i = 1 To UBound(avulsoVar)
     If avulsoVar(i, 1) <> "" Then
-        filteredVar(count_, 1) = String(100, "-")
-        filteredVar(count_, 2) = String(100, "-")
+        'filteredVar(count_, 1) = String(100, "-")
+        'filteredVar(count_, 2) = String(100, "-")
         filteredVar(count_, 3) = "AVULSO " & count_2 & " | Valor: R$" & avulsoVar(i, 6)
-        filteredVar(count_, 4) = String(100, "-")
-        filteredVar(count_, 5) = String(100, "-")
-        filteredVar(count_, 6) = String(100, "-")
-        filteredVar(count_, 7) = String(100, "-")
-        count_ = count_ + 1
-        filteredVar(count_, 3) = "Status: " & avulsoVar(i, 9)
-        count_ = count_ + 1
-        filteredVar(count_, 3) = "Intervalo: " & avulsoVar(i, 10)
-        count_ = count_ + 1
-        filteredVar(count_, 3) = "Comentario: " & avulsoVar(i, 11)
+        'filteredVar(count_, 4) = String(100, "-")
+        filteredVar(count_, 5) = "Stat: " & avulsoVar(i, 9)
+        filteredVar(count_, 6) = "Int: " & avulsoVar(i, 10)
+        filteredVar(count_, 7) = "Com: " & avulsoVar(i, 11)
         count_ = count_ + 1
         count_2 = count_2 + 1
         For col = 1 To 3
@@ -170,7 +164,9 @@ For i = 1 To UBound(avulsoVar)
         filteredVar(count_, 6) = avulsoVar(i, 4)
         count_ = count_ + 1
 
-        filteredVar(count_, 1) = "-"
+        For col = 1 To 7
+            filteredVar(count_, col) = String(100, "-")
+        Next col
         count_ = count_ + 1
     End If
 Next i

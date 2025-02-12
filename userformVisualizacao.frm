@@ -30,14 +30,16 @@ Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
     
-    If toggle_avulso.Caption = "Avulsos" Then
+    pagina = isPage
+    
+    If pagina = "Avulsos" Then
         resposta = MsgBox("Deseja mesmo deletar esse Avulso?", vbYesNo, "Apagar")
     
         If resposta <> vbYes Then Exit Sub
         
-        lista_index = userformVisualizacao.list_combos.ListIndex
+        lista_index = userformVisualizacao.list_avulsos.ListIndex
         
-        id = userformVisualizacao.list_combos.List(lista_index, 0)
+        id = userformVisualizacao.list_avulsos.List(lista_index, 0)
         
         Call deleteDatabase(Avulsos, Avulsos.Range("a1").CurrentRegion, 1, id, 1, 10)
         Call feedAvulsos
@@ -65,12 +67,24 @@ Private Sub button_calendario_Click()
     Calendario.Show
     button_calendario.Caption = Calendario.labelDataSelecionada
     
+    Call limparTextbox
+    
+    
     Call feedAvulsos
     Call feedCombos
     Call feedDescritivo
     
 End Sub
 
+Private Sub limparTextbox()
+    textbox_filtroStatus = ""
+    textbox_itens = ""
+End Sub
+
+Private Function isPage() As String
+    pag_index = MultiPage1.Value
+    isPage = MultiPage1.Pages(pag_index).Caption
+End Function
 Private Sub button_clonar_Click()
     
     
@@ -201,6 +215,13 @@ End Sub
 
 Private Sub list_descritivo_Click()
 
+End Sub
+
+Private Sub MultiPage1_Change()
+    limparTextbox
+    Call feedCombos
+    Call feedAvulsos
+    Call feedDescritivo
 End Sub
 
 Private Sub UserForm_Activate()
