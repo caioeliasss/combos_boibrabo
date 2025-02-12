@@ -100,7 +100,7 @@ For j = 1 To UBound(comboVar)
     If comboVar(j, 1) <> "" Then
         filteredVar(count_, 1) = String(50, "-")
         filteredVar(count_, 2) = String(50, "-")
-        filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: " & comboVar(j, 5) & " | Data: " & comboVar(j, 7)
+        filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: R$" & comboVar(j, 5) & " | Data: " & comboVar(j, 7)
         filteredVar(count_, 4) = String(50, "-")
         filteredVar(count_, 5) = String(50, "-")
         filteredVar(count_, 6) = String(50, "-")
@@ -151,7 +151,7 @@ For i = 1 To UBound(avulsoVar)
     If avulsoVar(i, 1) <> "" Then
         filteredVar(count_, 1) = String(50, "-")
         filteredVar(count_, 2) = String(50, "-")
-        filteredVar(count_, 3) = "AVULSO " & count_2 & " | Valor: " & avulsoVar(i, 6)
+        filteredVar(count_, 3) = "AVULSO " & count_2 & " | Valor: R$" & avulsoVar(i, 6)
         filteredVar(count_, 4) = String(50, "-")
         filteredVar(count_, 5) = String(50, "-")
         filteredVar(count_, 6) = String(50, "-")
@@ -168,6 +168,9 @@ For i = 1 To UBound(avulsoVar)
             filteredVar(count_, col) = avulsoVar(i, col)
         Next col
         filteredVar(count_, 6) = avulsoVar(i, 4)
+        count_ = count_ + 1
+
+        filteredVar(count_, 1) = "-"
         count_ = count_ + 1
     End If
 Next i
