@@ -56,7 +56,7 @@ Next i
 
 End Sub
 
-Public Function getRangeDescritivo(dia As Date, filtro_status As String) As Range
+Public Function getRangeDescritivo(dia As Variant, filtro_status As String) As Range
 Dim rg As Range
 Dim var As Variant
 Dim comboVar As Variant
@@ -70,6 +70,7 @@ ReDim avulsoVar(1 To 500, 1 To 11)
 Descritivo.Range("a2:h1000").ClearContents
 
 Set rg = Combos.Range("a1").CurrentRegion
+Set rg = rg.Offset(1).Resize(rg.Rows.Count - 1)
 rg.Sort Key1:=rg.Columns(5), Order1:=xlDescending, Header:=xlNo
 var = rg
 count_ = 1
@@ -99,7 +100,7 @@ For j = 1 To UBound(comboVar)
     If comboVar(j, 1) <> "" Then
         filteredVar(count_, 1) = String(50, "-")
         filteredVar(count_, 2) = String(50, "-")
-        filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: " & comboVar(j, 5)
+        filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: " & comboVar(j, 5) & " | Data: " & comboVar(j, 7)
         filteredVar(count_, 4) = String(50, "-")
         filteredVar(count_, 5) = String(50, "-")
         filteredVar(count_, 6) = String(50, "-")
@@ -475,6 +476,7 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
 
 

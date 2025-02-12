@@ -62,23 +62,17 @@ End Sub
 Private Sub button_calendario_Click()
     Calendario.Show
     button_calendario.Caption = Calendario.labelDataSelecionada
-    If toggle_descritivo.Caption = "On" Then
-        Call feedDescritivo
-    Else
     
-        If toggle_avulso.Caption = "Combos" Then
-            Call feedCombos
-        Else
-            Call feedAvulsos
-        End If
-    End If
+    Call feedAvulsos
+    Call feedCombos
+    Call feedDescritivo
     
 End Sub
 
 Private Sub button_clonar_Click()
     
     If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("Est?p? s?valida para os combos")
+        MsgBox ("Esta opcao e valida para os combos")
         Exit Sub
     End If
     
@@ -99,25 +93,14 @@ End Sub
 
 Private Sub button_consultar_Click()
     
-    If toggle_descritivo.Caption = "On" Then
-        Call feedDescritivo
-    Else
-    
-        If toggle_avulso.Caption = "Combos" Then
-            Call feedCombos
-        Else
-            Call feedAvulsos
-        End If
-    End If
+    Call feedAvulsos
+    Call feedCombos
+    Call feedDescritivo
     
 End Sub
 
 Private Sub button_gerarPDF_Click()
-    If toggle_descritivo.Caption <> "On" Then
-        MsgBox ("Somente gera PDF no modo descritivo")
-        Exit Sub
-    Else
-    
+
         Dim rng As Range
         Dim caminho As String
         Dim nomeArquivo As String
@@ -160,11 +143,9 @@ End Sub
 
 Private Sub button_limparCalendario_Click()
     button_calendario.Caption = "Calendario"
-    If toggle_avulso.Caption = "Combos" Then
-        Call feedCombos
-    Else
-        Call feedAvulsos
-    End If
+    Call feedAvulsos
+    Call feedCombos
+    Call feedDescritivo
 End Sub
 
 
@@ -179,54 +160,32 @@ Private Sub combobox_ordenar_Change()
 End Sub
 
 Private Sub list_combos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    If toggle_avulso.Caption = "Combos" Then
-        userformAlterarCombo.Show
-        Call feedCombos
-    Else
-        userformAlterarAvulso.Show
-        Call feedAvulsos
-    End If
+    
+    userformAlterarCombo.Show
+    Call feedCombos
+    
+End Sub
+Private Sub list_avulsos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
+    
+    userformAlterarAvulso.Show
+    Call feedAvulsos
     
 End Sub
 
-Private Sub toggle_avulso_Click()
-    If toggle_avulso.Caption = "Combos" Then
-        toggle_avulso.Caption = "Avulsos"
-        Call feedAvulsos
-    Else
-        toggle_avulso.Caption = "Combos"
-        Call feedCombos
-    End If
-    
-End Sub
-
-Private Sub toggle_descritivo_Click()
-    Descritivo.Range("a2:k100").ClearContents
-    
-    If toggle_descritivo.Caption = "Off" Then
-        toggle_descritivo.Caption = "On"
-        Call feedDescritivo
-    Else
-        toggle_descritivo.Caption = "Off"
-        toggle_avulso.Caption = "Combos"
-        Call feedCombos
-    End If
-    
-End Sub
 
 Private Sub feedDescritivo()
     Dim Data As Date
     Dim rg As Range
     
     If button_calendario.Caption = "Calendario" Then
-        button_calendario_Click
+            Data = Empty
+        Else
+            Data = CDate(button_calendario.Caption)
     End If
-    
-    Data = CDate(button_calendario.Caption)
     
     Set rg = getRangeDescritivo(Data, textbox_filtroStatus.Text)
     
-    With list_combos
+    With list_descritivo
         .RowSource = rg.Address(external:=True)
         .ColumnCount = rg.Columns.Count
         .ColumnHeads = True
@@ -238,21 +197,22 @@ Private Sub feedDescritivo()
 End Sub
 
 Private Sub UserForm_Activate()
-    If toggle_avulso.Caption = "Combos" Then
-        Call feedCombos
-    Else
-        Call feedAvulsos
-    End If
-    
+    feedCombos
+    feedAvulsos
+    feedDescritivo
+    Call feedOrdenar
 End Sub
 
 Private Sub UserForm_Initialize()
-    Call feedCombos
+    feedCombos
+    feedAvulsos
+    feedDescritivo
     Call feedOrdenar
 End Sub
 
 Private Sub feedOrdenar()
     
+    combobox_ordenar.Clear
     With combobox_ordenar
         .AddItem "Produtos"
         .AddItem "Produto ID"
@@ -299,7 +259,7 @@ Private Sub feedAvulsos()
     
     Set rg = getRangeAvulsos(textbox_itens, Data)
     
-    With list_combos
+    With list_avulsos
         .RowSource = rg.Address(external:=True)
         .ColumnCount = rg.Columns.Count
         .ColumnHeads = True
