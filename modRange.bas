@@ -248,6 +248,7 @@ Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
 ReDim filteredVar(1 To 1000, 1 To 15)
+Dim filtro As Boolean
 
 Combos.Range("aa2:az1000").ClearContents
 
@@ -279,7 +280,13 @@ For i = 1 To UBound(var)
         dataUso = var(i, 7)
     End If
     
-    If InStr(1, var(i, 2), UCase(pesquisa_produto), vbTextCompare) > 0 And var(i, 7) = dataUso And InStr(1, var(i, 8), UCase(filtro_status), vbTextCompare) > 0 Then
+    If IsEmpty_filtro_status Then
+        filtro = True
+    Else
+        filtro = InStr(1, var(i, 8), UCase(filtro_status), vbTextCompare) > 0
+    End If
+    
+    If InStr(1, var(i, 2), UCase(pesquisa_produto), vbTextCompare) > 0 And var(i, 7) = dataUso And filtro Then
         For col = 1 To UBound(var, 2)
             filteredVar(count_, col) = var(i, col)
         Next col
@@ -479,6 +486,7 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
 
 

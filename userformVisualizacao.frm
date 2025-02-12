@@ -25,6 +25,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -72,19 +73,17 @@ End Sub
 
 Private Sub button_clonar_Click()
     
-    If toggle_avulso.Caption = "Avulsos" Then
-        MsgBox ("Esta opcao e valida para os combos")
-        Exit Sub
-    End If
     
     Dim resposta As VbMsgBoxResult
     Dim id As String
+    lista_index = userformVisualizacao.list_combos.ListIndex
+    If lista_index < 0 Then Exit Sub
     
     resposta = MsgBox("Deseja mesmo clonar esse combo?", vbYesNo, "Clonar")
     
     If resposta <> vbYes Then Exit Sub
     
-    lista_index = userformVisualizacao.list_combos.ListIndex
+    
     
     id = userformVisualizacao.list_combos.List(lista_index, 0)
     Call clonarCombo(id)
@@ -277,6 +276,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 
