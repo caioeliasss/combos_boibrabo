@@ -7,6 +7,7 @@ Public Sub setHeaders()
     
     Avulsos.Range("k1").Value = "Comentarios"
     Avulsos.Range("ak1").Value = "Comentarios"
+    Descritivo.Range("h1:h2").Clear
     
     Produtos.Visible = xlSheetHidden
     Combos.Visible = xlSheetHidden
