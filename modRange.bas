@@ -7,7 +7,6 @@ Public Sub setHeaders()
     
     Avulsos.Range("k1").Value = "Comentarios"
     Avulsos.Range("ak1").Value = "Comentarios"
-    Descritivo.Range("h1:h2").Clear
     
     Produtos.Visible = xlSheetHidden
     Combos.Visible = xlSheetHidden
@@ -136,8 +135,8 @@ var = Avulsos.Range("a1").CurrentRegion
 
 count_3 = 1
 
-For i = 1 To UBound(var)
-    
+For i = 2 To UBound(var)
+    If IsEmpty_dataUso Then dia = CDate(var(i, 8))
     If var(i, 8) = dia Then
         For col = 1 To UBound(var, 2)
             avulsoVar(count_3, col) = var(i, col)
@@ -158,11 +157,11 @@ For i = 1 To UBound(avulsoVar)
         filteredVar(count_, 6) = String(50, "-")
         filteredVar(count_, 7) = String(50, "-")
         count_ = count_ + 1
-        filteredVar(count_, 3) = "Status: " & avulsoVar(j, 9)
+        filteredVar(count_, 3) = "Status: " & avulsoVar(i, 9)
         count_ = count_ + 1
-        filteredVar(count_, 3) = "Intervalo: " & avulsoVar(j, 10)
+        filteredVar(count_, 3) = "Intervalo: " & avulsoVar(i, 10)
         count_ = count_ + 1
-        filteredVar(count_, 3) = "Comentario: " & avulsoVar(j, 11)
+        filteredVar(count_, 3) = "Comentario: " & avulsoVar(i, 11)
         count_ = count_ + 1
         count_2 = count_2 + 1
         For col = 1 To 3
@@ -477,6 +476,7 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
 
 
