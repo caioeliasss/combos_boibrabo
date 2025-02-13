@@ -206,7 +206,7 @@ Private Sub feedDescritivo()
         .RowSource = rg.Address(external:=True)
         .ColumnCount = rg.Columns.Count
         .ColumnHeads = True
-        .ColumnWidths = "0;40;300;30;150;150;50"
+        .ColumnWidths = "0;55;300;30;150;150;50"
         .ListIndex = 0
     
     End With
