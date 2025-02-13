@@ -83,9 +83,14 @@ For i = 1 To UBound(var)
     If IsEmpty_filtro_status Then filtro_status = var(i, 8)
     
     If IsEmpty_dataUso Then dia = var(i, 7)
+
+    If IsEmpty_filtro_status Then
+        filtro = True
+    Else
+        filtro = InStr(1, UCase(var(i, 8)), UCase(filtro_status), vbTextCompare) > 0
+    End If
     
-    
-    If var(i, 7) = dia And InStr(1, UCase(var(i, 8)), UCase(filtro_status), vbTextCompare) > 0 Then
+    If var(i, 7) = dia And filtro Then
         For col = 1 To UBound(var, 2)
             comboVar(count_, col) = var(i, col)
         Next col
