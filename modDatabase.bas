@@ -8,12 +8,32 @@ Public Sub AtualizarDatabase()
     Dim var As Variant
     Dim var2 As Variant
     Dim caminhoArquivo As String
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+
+    
     
     caminhoArquivo = ThisWorkbook.Path & "\PRODUTOS.xlsx"
+    log_database = ThisWorkbook.Path & "\logfile.dat"
+    
+    
+    If fso.FileExists(log_database) Then
+        On Error Resume Next
+            fso.DeleteFile log_database, True
+        On Error GoTo 0
+    End If
+    
+    
+    Open log_database For Output As #1
+    Close #1
+    
+    SetAttr log_database, vbHidden + vbSystem
+    
     Set wb = Workbooks.Open(caminhoArquivo)
     
     var = wb.Sheets(1).Range("A1").CurrentRegion.Value
-
+    
+    wb.Save
     wb.Close
 
     var2 = Produtos.Range("a1").CurrentRegion
@@ -65,19 +85,19 @@ Public Sub ConsultarPagamento()
         Next i
         
         
-        primeiroDia = DateSerial(Year(Date), Month(Date), 1)
+        primeiroDia = DateSerial(Year(Date), month(Date), 1)
         
         For i = 1 To UBound(var)
             If var(i, 0) = meuId And primeiroDia = CDate(var(i, 2)) Then
                 If var(i, 3) = "TRUE" Then
-                    'MsgBox ("Sua assinatura está valida")
+                    'MsgBox ("Sua assinatura est?alida")
                     isValid = True
                 Else
-                    MsgBox ("Sua assinatura não está valida, você não terá mais acesso. Entre em contato com o distribuidor")
+                    MsgBox ("Sua assinatura n?est?alida, voc??ter?ais acesso. Entre em contato com o distribuidor")
                     isValid = False
                 End If
             Else
-                MsgBox ("Sua assinatura não está valida, você não terá mais acesso. Entre em contato com o distribuidor")
+                MsgBox ("Sua assinatura n?est?alida, voc??ter?ais acesso. Entre em contato com o distribuidor")
                 isValid = False
             End If
         Next i
@@ -86,4 +106,5 @@ Public Sub ConsultarPagamento()
         MsgBox "Erro ao acessar os dados!", vbCritical
     End If
 End Sub
+
 
