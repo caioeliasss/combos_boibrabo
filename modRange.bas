@@ -105,7 +105,7 @@ count_2 = 1
 For j = 1 To UBound(comboVar)
     If comboVar(j, 1) <> "" Then
         filteredVar(count_, 1) = String(100, "-")
-        filteredVar(count_, 2) = String(100, "-")
+        filteredVar(count_, 2) = comboVar(j,1)
         filteredVar(count_, 3) = "COMBO " & count_2 & " | Valor: R$" & comboVar(j, 5) & " | Data: " & comboVar(j, 7)
         filteredVar(count_, 4) = String(100, "-")
         filteredVar(count_, 5) = comboVar(j, 8)
