@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} userformCriacaoCombos 
    Caption         =   "Combos BOIBRABO"
-   ClientHeight    =   11415
+   ClientHeight    =   11835
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   19860
@@ -142,6 +142,10 @@ Produtos.Range("u2:ab1000").ClearContents
 
 End Sub
 
+Private Sub listCombos_Click()
+    Call nameProduto(listCombos)
+End Sub
+
 Private Sub listCombos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 
 Dim peso As String
@@ -176,6 +180,16 @@ Call totalizadorVendaFora
 Call feedHeaderNew
 Call feedProdutos
 
+End Sub
+
+Private Sub listProdutos_click()
+    Call nameProduto(listProdutos)
+End Sub
+
+Private Sub nameProduto(lista As Object)
+    index_atual = lista.ListIndex
+    If index_atual = -1 Then Exit Sub
+    label_produto.Caption = lista.List(index_atual, 1)
 End Sub
 
 Private Sub listProdutos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
