@@ -19,6 +19,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public DataSelecionada As Date
 
 
@@ -209,6 +210,7 @@ On Error Resume Next
 porcentagem = 1 - ((textbox_porcentagem) * 0.01)
 
 textbox_venda = label_custo / porcentagem
+textbox_venda = Round(textbox_venda, 2)
 
 On Error GoTo 0
 End Sub
@@ -289,8 +291,16 @@ End Sub
 
 
 
+Private Sub textbox_idproduto_Change()
+    Call feedProdutos
+End Sub
+
 Private Sub textbox_porcentagem_Change()
-Call calcularVenda
+    Call calcularVenda
+End Sub
+
+Private Sub textbox_produto_Change()
+    Call feedProdutos
 End Sub
 
 Private Sub textbox_venda_Change()
@@ -300,10 +310,17 @@ Private Sub textbox_venda_Change()
 
     label_porcentagem = Val((1 - (Val(label_custo) / Val(textbox_venda))) * 100)
     label_lucro = Val(textbox_venda) - Val(label_custo)
+    
+    Call calcularDesconto
 
     On Error GoTo 0 ' Desativa o tratamento de erro para evitar ignorar outros erros inesperados
 End Sub
 
+Private Sub calcularDesconto()
+
+    textbox_desconto = Round(label_venda_foracombo - textbox_venda, 2)
+
+End Sub
 
 Private Sub UserForm_Initialize()
 
@@ -360,6 +377,7 @@ End With
 
 
 End Sub
+
 
 
 
