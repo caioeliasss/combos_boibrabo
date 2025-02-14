@@ -20,6 +20,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public DataSelecionada As Date
 
 
@@ -264,7 +265,10 @@ End Sub
 
 
 Private Sub button_consultar_Click()
-Call feedProdutos
+
+    textbox_idproduto = ""
+    textbox_produto = ""
+    Call feedProdutos
 
 End Sub
 
@@ -391,6 +395,7 @@ End With
 
 
 End Sub
+
 
 
 
