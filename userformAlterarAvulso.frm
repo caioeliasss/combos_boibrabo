@@ -16,7 +16,10 @@ Attribute VB_Exposed = False
 
 
 
-
+Private Sub button_calendario_Click()
+    Calendario.Show
+    button_calendario.Caption = Calendario.labelDataSelecionada
+End Sub
 
 Private Sub button_limparCalendario_Click()
     button_calendario.Caption = "Calendario"
