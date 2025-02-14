@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Public id As String
 
 
 
@@ -26,7 +27,6 @@ Private Sub button_limparCalendario_Click()
 End Sub
 
 Private Sub button_salvar_Click()
-Dim id As String
 Dim Data As String
 Dim status As String
 Dim obs As String
@@ -48,9 +48,9 @@ Dim obs As String
     
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 9, status)
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 10, obs)
-    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6, Cdbl(textbox_precoVenda))
-    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 4, CDbl(textbox_peso))
-    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 5, Cdbl(textbox_peso * peso))
+    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6, textbox_precoVenda)
+    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 4, textbox_peso)
+    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 5, textbox_peso * peso)
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 11, textbox_comentario)
     
     Unload Me
@@ -59,7 +59,6 @@ Dim obs As String
 End Sub
 
 Private Sub isDateUsed()
-    Dim id As String
     
     
     lista_index = userformVisualizacao.list_avulsos.ListIndex
@@ -76,28 +75,39 @@ Private Sub isDateUsed()
 End Sub
 
 Private Sub feedProduto()
-    Dim id As String
     
     
     lista_index = userformVisualizacao.list_avulsos.ListIndex
     
     id = userformVisualizacao.list_avulsos.List(lista_index, 0)
-
-   dia = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
-   if dia = "" then dia = "Calendario"
-   button_calendario.Caption = dia
+    
+    dia = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
+    If dia = "" Then dia = "Calendario"
+    
+    button_calendario.Caption = dia
+    textbox_custo = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 5)
     textbox_precoVenda = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6)
     textbox_status = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 9)
     textbox_observacao = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 10)
     textbox_peso = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 4)
     textbox_comentario = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 11)
+    textbox_lucro = getLucro
     
+End Sub
+
+Private Function getLucro()
+    getLucro = Round((1 - textbox_custo / textbox_precoVenda) * 100, 1)
+End Function
+
+Private Sub textbox_precoVenda_Change()
+    textbox_lucro = getLucro
 End Sub
 
 Private Sub UserForm_Initialize()
     Call isDateUsed
     Call feedProduto
 End Sub
+
 
 
 
