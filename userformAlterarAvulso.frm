@@ -59,9 +59,9 @@ Private Sub isDateUsed()
     Dim id As String
     
     
-    lista_index = userformVisualizacao.list_combos.ListIndex
+    lista_index = userformVisualizacao.list_avulsos.ListIndex
     
-    id = userformVisualizacao.list_combos.List(lista_index, 0)
+    id = userformVisualizacao.list_avulsos.List(lista_index, 0)
     
     Data = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
     If Data = "" Then
@@ -76,9 +76,9 @@ Private Sub feedProduto()
     Dim id As String
     
     
-    lista_index = userformVisualizacao.list_combos.ListIndex
+    lista_index = userformVisualizacao.list_avulsos.ListIndex
     
-    id = userformVisualizacao.list_combos.List(lista_index, 0)
+    id = userformVisualizacao.list_avulsos.List(lista_index, 0)
     
     textbox_precoVenda = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6)
     textbox_status = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 9)
