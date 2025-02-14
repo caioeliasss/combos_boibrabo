@@ -79,7 +79,8 @@ Private Sub feedProduto()
     lista_index = userformVisualizacao.list_avulsos.ListIndex
     
     id = userformVisualizacao.list_avulsos.List(lista_index, 0)
-    
+
+   button_calendario.Caption = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
     textbox_precoVenda = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6)
     textbox_status = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 9)
     textbox_observacao = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 10)
