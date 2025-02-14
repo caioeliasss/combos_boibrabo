@@ -8,26 +8,12 @@ Public Sub AtualizarDatabase()
     Dim var As Variant
     Dim var2 As Variant
     Dim caminhoArquivo As String
-    Dim fso As Object
-    Set fso = CreateObject("Scripting.FileSystemObject")
 
     
     
     caminhoArquivo = ThisWorkbook.Path & "\PRODUTOS.xlsx"
-    log_database = ThisWorkbook.Path & "\logfile.dat"
     
-    
-    If fso.FileExists(log_database) Then
-        On Error Resume Next
-            fso.DeleteFile log_database, True
-        On Error GoTo 0
-    End If
-    
-    
-    Open log_database For Output As #1
-    Close #1
-    
-    SetAttr log_database, vbHidden + vbSystem
+    Call makeHiddenFile("logfile")
     
     Set wb = Workbooks.Open(caminhoArquivo)
     
@@ -62,49 +48,103 @@ Public Sub ConsultarPagamento()
     Dim var As Variant
     Dim linha As Variant
     
-    URL = "https://docs.google.com/spreadsheets/d/1_MmDQ2Ei3xBqD-vyIp6icLEPCUz1IIaSpUbmN7OxfB0/export?format=csv"
+    payment_file = ThisWorkbook.Path & "\valid_payment.dat"
     
-    meuId = "1"
+    existe_arquivo = isArquivo("valid_payment")
     
-    Set http = CreateObject("WinHttp.WinHttpRequest.5.1")
-    http.Open "GET", URL, False
-    http.Send
+    If existe_arquivo <> True Then
+        isDue = 1000
+    Else
+        isDue = Now - FileDateTime(payment_file)
+    End If
     
-    If http.status = 200 Then
-        dados = Split(http.responseText, vbLf)
-        
-        ReDim var(0 To UBound(dados), 0 To 3)
-        
-        
-        For i = 0 To UBound(dados)
-            linha = Split(dados(i), ",")
+    If isDue >= 5 Then
             
-            For col = 0 To UBound(linha)
-                var(i, col) = linha(col)
-            Next col
-        Next i
         
+        URL = "https://docs.google.com/spreadsheets/d/1_MmDQ2Ei3xBqD-vyIp6icLEPCUz1IIaSpUbmN7OxfB0/export?format=csv"
         
-        primeiroDia = DateSerial(Year(Date), month(Date), 1)
+        meuId = "1"
         
-        For i = 1 To UBound(var)
-            If var(i, 0) = meuId And primeiroDia = CDate(var(i, 2)) Then
-                If var(i, 3) = "TRUE" Then
-                    'MsgBox ("Sua assinatura est?alida")
-                    isValid = True
+        Set http = CreateObject("WinHttp.WinHttpRequest.5.1")
+        http.Open "GET", URL, False
+        http.Send
+        
+        If http.status = 200 Then
+            dados = Split(http.responseText, vbLf)
+            
+            ReDim var(0 To UBound(dados), 0 To 3)
+            
+            
+            For i = 0 To UBound(dados)
+                linha = Split(dados(i), ",")
+                
+                For col = 0 To UBound(linha)
+                    var(i, col) = linha(col)
+                Next col
+            Next i
+            
+            
+            primeiroDia = DateSerial(Year(Date), Month(Date), 1)
+            
+            For i = 1 To UBound(var)
+                If var(i, 0) = meuId And primeiroDia = CDate(var(i, 2)) Then
+                    If var(i, 3) = "TRUE" Then
+                        Call makeHiddenFile("valid_payment")
+                        isValid = True
+                    Else
+                        MsgBox ("Sua assinatura n?est?alida, voc??ter?ais acesso. Entre em contato com o distribuidor")
+                        isValid = False
+                    End If
                 Else
                     MsgBox ("Sua assinatura n?est?alida, voc??ter?ais acesso. Entre em contato com o distribuidor")
                     isValid = False
                 End If
-            Else
-                MsgBox ("Sua assinatura n?est?alida, voc??ter?ais acesso. Entre em contato com o distribuidor")
-                isValid = False
-            End If
-        Next i
-        
+            Next i
+            
+        Else
+            MsgBox "Erro ao acessar os dados!", vbCritical
+        End If
     Else
-        MsgBox "Erro ao acessar os dados!", vbCritical
+        isValid = True
     End If
+    
 End Sub
+
+Private Sub makeHiddenFile(nome As String)
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    log_database = ThisWorkbook.Path & "\" & nome & ".dat"
+        
+    
+    If fso.fileExists(log_database) Then
+        On Error Resume Next
+            fso.DeleteFile log_database, True
+        On Error GoTo 0
+    End If
+    
+    
+    Open log_database For Output As #1
+    Close #1
+    
+    SetAttr log_database, vbHidden + vbSystem
+
+End Sub
+
+Private Function isArquivo(nome As String) As Boolean
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    log_database = ThisWorkbook.Path & "\" & nome & ".dat"
+        
+    
+    If fso.fileExists(log_database) Then
+        isArquivo = True
+    Else
+        isArquivo = False
+    End If
+    
+End Function
+
 
 
