@@ -48,9 +48,9 @@ Dim obs As String
     
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 9, status)
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 10, obs)
-    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6, textbox_precoVenda)
-    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 4, textbox_peso)
-    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 5, textbox_peso * peso)
+    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6, Cdbl(textbox_precoVenda))
+    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 4, CDbl(textbox_peso))
+    Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 5, Cdbl(textbox_peso * peso))
     Call updateDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 11, textbox_comentario)
     
     Unload Me
@@ -83,7 +83,9 @@ Private Sub feedProduto()
     
     id = userformVisualizacao.list_avulsos.List(lista_index, 0)
 
-   button_calendario.Caption = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
+   dia = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 8)
+   if dia = "" then dia = "Calendario"
+   button_calendario.Caption = dia
     textbox_precoVenda = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 6)
     textbox_status = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 9)
     textbox_observacao = consultarDatabase(Avulsos.Range("a1").CurrentRegion, Avulsos, 1, id, 10)
