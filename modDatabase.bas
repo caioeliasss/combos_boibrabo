@@ -13,7 +13,7 @@ Public Sub AtualizarDatabase()
     
     caminhoArquivo = ThisWorkbook.Path & "\PRODUTOS.xlsx"
     
-    Call makeHiddenFile("logfile")
+    Call createDocument(Log, Array("last_update", Now))
     
     Set wb = Workbooks.Open(caminhoArquivo)
     
@@ -48,14 +48,15 @@ Public Sub ConsultarPagamento()
     Dim var As Variant
     Dim linha As Variant
     
-    payment_file = ThisWorkbook.Path & "\valid_payment.dat"
     
-    existe_arquivo = isArquivo("valid_payment")
+    On Error Resume Next
+    last_check = consultarDatabase(Log.Range("a1").CurrentRegion, Log, 1, "last_check", 2)
+    On Error GoTo 0
     
-    If existe_arquivo <> True Then
+    If last_check = "" Then
         isDue = 1000
     Else
-        isDue = Now - FileDateTime(payment_file)
+        isDue = Now - last_check
     End If
     
     If isDue >= 5 Then
@@ -84,12 +85,12 @@ Public Sub ConsultarPagamento()
             Next i
             
             
-            primeiroDia = DateSerial(Year(Date), Month(Date), 1)
+            primeiroDia = DateSerial(Year(Date), month(Date), 1)
             
             For i = 1 To UBound(var)
                 If var(i, 0) = meuId And primeiroDia = CDate(var(i, 2)) Then
                     If var(i, 3) = "TRUE" Then
-                        Call makeHiddenFile("valid_payment")
+                        Call createDocument(Log, Array("last_check", Now))
                         isValid = True
                     Else
                         MsgBox ("Sua assinatura nao esta valida, voce nao tera mais acesso. Entre em contato com o distribuidor")
@@ -110,25 +111,11 @@ Public Sub ConsultarPagamento()
     
 End Sub
 
-Private Sub makeHiddenFile(nome As String)
-    Dim fso As Object
-    Set fso = CreateObject("Scripting.FileSystemObject")
+Private Sub createDocument(sheet As Worksheet, data As Variant)
+    lr = sheet.UsedRange.Rows.Count + 1
     
-    log_database = ThisWorkbook.Path & "\" & nome & ".dat"
-        
+    sheet.Range(Cells(lr, 1).Address, Cells(lr, UBound(data) + 1).Address).Value = data
     
-    If fso.fileExists(log_database) Then
-        On Error Resume Next
-            fso.DeleteFile log_database, True
-        On Error GoTo 0
-    End If
-    
-    
-    Open log_database For Output As #1
-    Close #1
-    
-    SetAttr log_database, vbHidden + vbSystem
-
 End Sub
 
 Private Function isArquivo(nome As String) As Boolean
@@ -145,6 +132,7 @@ Private Function isArquivo(nome As String) As Boolean
     End If
     
 End Function
+
 
 
 
