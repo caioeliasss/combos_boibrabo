@@ -92,11 +92,11 @@ Public Sub ConsultarPagamento()
                         Call makeHiddenFile("valid_payment")
                         isValid = True
                     Else
-                        MsgBox ("Sua assinatura n?est?alida, voc??ter?ais acesso. Entre em contato com o distribuidor")
+                        MsgBox ("Sua assinatura nao esta valida, voce nao tera mais acesso. Entre em contato com o distribuidor")
                         isValid = False
                     End If
                 Else
-                    MsgBox ("Sua assinatura n?est?alida, voc??ter?ais acesso. Entre em contato com o distribuidor")
+                    MsgBox ("Sua assinatura nao esta valida, voce nao tera mais acesso. Entre em contato com o distribuidor")
                     isValid = False
                 End If
             Next i
