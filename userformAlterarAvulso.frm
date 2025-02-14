@@ -22,19 +22,14 @@ Private Sub button_limparCalendario_Click()
     button_calendario.Caption = "Calendario"
 End Sub
 
-Private Sub button_calendario_Click()
-    Calendario.Show
-    button_calendario.Caption = Calendario.labelDataSelecionada
-End Sub
-
 Private Sub button_salvar_Click()
 Dim id As String
 Dim Data As String
 Dim status As String
 Dim obs As String
 
-    lista_index = userformVisualizacao.list_combos.ListIndex
-    id = userformVisualizacao.list_combos.List(lista_index, 0)
+    lista_index = userformVisualizacao.list_avulsos.ListIndex
+    id = userformVisualizacao.list_avulsos.List(lista_index, 0)
     Data = button_calendario.Caption
     If Data = "Calendario" Then Data = ""
     status = textbox_status
