@@ -252,6 +252,7 @@ Private Sub UserForm_Initialize()
     feedAvulsos
     feedDescritivo
     Call feedOrdenar
+   MultiPage1.Value = 0
 End Sub
 
 Private Sub feedOrdenar()
