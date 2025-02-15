@@ -29,6 +29,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -245,17 +246,19 @@ Private Sub UserForm_Activate()
     feedCombos
     feedAvulsos
     feedDescritivo
+    
 End Sub
 
 Private Sub UserForm_Initialize()
+    MultiPage1.Value = 0
     feedCombos
     feedAvulsos
     feedDescritivo
     Call feedOrdenar
-   MultiPage1.Value = 0
 End Sub
 
 Private Sub feedOrdenar()
+    
     
     combobox_ordenar.Clear
     With combobox_ordenar
@@ -323,6 +326,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 
