@@ -517,9 +517,7 @@ Public Function RemoverAcentos(texto As String) As String
     Dim caracteresSemAcento As String
     Dim i As Integer
     
-    ' Mapeamento de caracteres acentuados para suas versões sem acento
-    caracteresComAcento = "ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüç"
-    caracteresSemAcento = "AAAAAEEEEIIIIOOOOOUUUUCaaaaaeeeeiiiiooooouuuuc"
+    ' Mapeamento de caracteres acentuados para suas versé®¡s sem acento
     
     ' Substituir cada caractere acentuado pelo correspondente sem acento
     For i = 1 To Len(caracteresComAcento)
