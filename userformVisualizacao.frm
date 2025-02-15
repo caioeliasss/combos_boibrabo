@@ -28,6 +28,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -56,7 +57,7 @@ Private Sub button_apagarCombo_Click()
         
         id = userformVisualizacao.list_combos.List(lista_index, 0)
         
-        Call deleteDatabase(Combos, Combos.Range("a1").CurrentRegion, 1, id, 1, 9)
+        Call deleteDatabase(Combos, Combos.Range("a1").CurrentRegion, 1, id, 1, 10)
         Call deleteDatabase(ProdutosCombo, ProdutosCombo.Range("a1").CurrentRegion, 1, id, 1, 7)
         Call feedCombos
     End If
@@ -244,7 +245,6 @@ Private Sub UserForm_Activate()
     feedCombos
     feedAvulsos
     feedDescritivo
-    Call feedOrdenar
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -322,6 +322,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 

@@ -22,6 +22,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public DataSelecionada As Date
 
 
@@ -65,17 +66,19 @@ Dim avulsoRange As Range
 Dim varAvulsos As Variant
 
 
-    status = InputBox("Insira o status (nao pode estar vazio, caso contrario cancelara a operacao)", "Status")
-    observacao = InputBox("Insira o intervalo de peso da peca principal (nao pode estar vazio, caso contrario cancelara a operacao)", "Intervalo de peso")
-    comentario = InputBox("Insira um comentario (opcional)", "Comentarios")
     
     userformDataUso.Show
+    
+    If userformDataUso.isCanceled = True Then Exit Sub
+    
     data_uso = userformDataUso.button_calendario.Caption
     If data_uso = "Calendario" Then data_uso = ""
     If data_uso <> "" Then data_uso = CDate(data_uso)
     
-    If status = "" Then Exit Sub
-    If observacao = "" Then Exit Sub
+    status = userformDataUso.textbox_status
+    observacao = userformDataUso.texbox_int
+    comentario = userformDataUso.textbox_comentario
+    
 
 If listCombos.ListCount = 1 Then
 
@@ -217,6 +220,7 @@ Private Sub listProdutos_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     Call feedHeaderNew
     Call totalizadorCusto
     Call totalizadorVendaFora
+    Call calcularDesconto
     
 End Sub
 
@@ -398,6 +402,7 @@ End With
 
 
 End Sub
+
 
 
 
