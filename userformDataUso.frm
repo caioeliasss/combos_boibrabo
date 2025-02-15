@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Public isCanceled As Boolean
 
 
@@ -24,30 +25,37 @@ End Sub
 Private Sub button_cancel_Click()
     isCanceled = True
     Me.Hide
-    
+    Call limparCampos
 End Sub
 
 Private Sub button_limparCalendario_Click()
     button_calendario.Caption = "Calendario"
+    
 End Sub
 
 Private Sub button_salvar_Click()
     Me.Hide
+    Call limparCampos
 End Sub
 
 Private Sub UserForm_Initialize()
     
     isCanceled = False
     button_calendario.Caption = "Calendario"
+    Call limparCampos
+    
+End Sub
+
+Private Sub limparCampos()
+
     textbox_comentario = ""
     texbox_int = ""
     textbox_status = ""
     
 End Sub
-
-
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
     If CloseMode = vbFormControlMenu Then
         Cancel = True
     End If
 End Sub
+
