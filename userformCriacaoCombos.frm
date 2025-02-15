@@ -21,6 +21,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Public DataSelecionada As Date
 
 
@@ -381,6 +382,8 @@ End Sub
 Private Sub feedProdutos()
 Dim rg As Range
 
+produto = RemoverAcentos(textbox_produto.Text)
+
 Set rg = getRangeProdutos(textbox_produto, textbox_idproduto, placeholder_favorito)
 
 With listProdutos
@@ -395,6 +398,7 @@ End With
 
 
 End Sub
+
 
 
 

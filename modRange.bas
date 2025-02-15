@@ -57,7 +57,7 @@ Next i
 
 End Sub
 
-Public Function getRangeDescritivo(dia As Variant, filtro_status As String) As Range
+Public Function getRangeDescritivo(dia As Variant, filtro_status As String, ordem As Integer) As Range
 Dim rg As Range
 Dim var As Variant
 Dim comboVar As Variant
@@ -72,7 +72,7 @@ Descritivo.Range("a2:h1000").ClearContents
 
 Set rg = Combos.Range("a1").CurrentRegion
 Set rg = rg.Offset(1).Resize(rg.Rows.Count - 1)
-rg.Sort Key1:=rg.Columns(5), Order1:=xlDescending, Header:=xlNo
+rg.Sort Key1:=rg.Columns(ordem), Order1:=xlDescending, Header:=xlNo
 var = rg
 count_ = 1
 
@@ -192,11 +192,12 @@ Set getRangeDescritivo = rg
 
 
 End Function
-Public Function getRangeAvulsos(pesquisa_produto As String, dataUso As String) As Range
+Public Function getRangeAvulsos(pesquisa_produto As String, dataUso As String, ordem As Integer, filtro_status As String) As Range
 Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
 ReDim filteredVar(1 To 1000, 1 To 15)
+Dim frase As String
 
 Avulsos.Range("aa2:az1000").ClearContents
 
@@ -211,18 +212,36 @@ var = rg
 
 If pesquisa_produto = "" Then IsEmpty_pesquisaProduto = True
 If dataUso = "" Then IsEmpty_dataUso = True
+If filtro_status = "" Then IsEmpty_filtro_status = True
 count_ = 1
 
 For i = 1 To UBound(var)
 
+    If IsEmpty_filtro_status Then
+        filtro_status = var(i, 9)
+    End If
     If IsEmpty_pesquisaProduto Then
         pesquisa_produto = var(i, 3)
     End If
     If IsEmpty_dataUso Then
         dataUso = var(i, 8)
     End If
+    If IsEmpty_filtro_status Then
+        filtro = True
+    Else
+        filtro = InStr(1, var(i, 8), UCase(filtro_status), vbTextCompare) > 0
+    End If
     
-    If InStr(1, var(i, 3), UCase(pesquisa_produto), vbTextCompare) > 0 And var(i, 8) = dataUso Then
+    frase = var(i, 3)
+    frase = RemoverAcentos(frase)
+    
+    If IsEmpty_pesquisaProduto Then
+        frase_pesquisa = True
+    Else
+        frase_pesquisa = InStr(1, frase, UCase(pesquisa_produto), vbTextCompare) > 0
+    End If
+    
+    If frase_pesquisa And var(i, 8) = dataUso And filtro Then
         For col = 1 To UBound(var, 2)
             filteredVar(count_, col) = var(i, col)
         Next col
@@ -239,7 +258,7 @@ End If
 
 Set rg = Avulsos.Range("AA2").CurrentRegion
 Set rg = rg.Offset(1).Resize(rg.Rows.Count - 1)
-rg.Sort Key1:=rg.Columns(7), Order1:=xlDescending, Header:=xlNo
+rg.Sort Key1:=rg.Columns(ordem), Order1:=xlDescending, Header:=xlNo
 
 Set getRangeAvulsos = rg
 
@@ -250,6 +269,7 @@ Dim var As Variant
 Dim filteredVar As Variant
 ReDim filteredVar(1 To 1000, 1 To 15)
 Dim filtro As Boolean
+Dim frase As String
 
 Combos.Range("aa2:az1000").ClearContents
 
@@ -287,7 +307,16 @@ For i = 1 To UBound(var)
         filtro = InStr(1, var(i, 8), UCase(filtro_status), vbTextCompare) > 0
     End If
     
-    If InStr(1, var(i, 2), UCase(pesquisa_produto), vbTextCompare) > 0 And var(i, 7) = dataUso And filtro Then
+    frase = var(i, 2)
+    frase = RemoverAcentos(frase)
+    
+    If IsEmpty_pesquisaProduto Then
+        frase_pesquisa = True
+    Else
+        frase_pesquisa = InStr(1, frase, UCase(pesquisa_produto), vbTextCompare) > 0
+    End If
+    
+    If frase_pesquisa And var(i, 7) = dataUso And filtro Then
         For col = 1 To UBound(var, 2)
             filteredVar(count_, col) = var(i, col)
         Next col
@@ -357,6 +386,7 @@ Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
 ReDim filteredVar(1 To 1000, 1 To 15)
+Dim frase As String
 
 Call setHeaders
 Call apagarVestigios
@@ -384,12 +414,16 @@ For i = 1 To UBound(var)
         favorito = var(i, 13)
     End If
     
-   If InStr(1, var(i, 2), UCase(pesquisa_nome), vbTextCompare) > 0 And pesquisa_id = var(i, 1) And var(i, 13) = favorito Then
-        For col = 1 To UBound(var, 2)
-            filteredVar(count_, col) = var(i, col)
-        Next col
-        count_ = count_ + 1
-    End If
+    frase = var(i, 2)
+    
+    frase = RemoverAcentos(frase)
+    
+    If InStr(1, frase, UCase(pesquisa_nome), vbTextCompare) > 0 And pesquisa_id = var(i, 1) And var(i, 13) = favorito Then
+         For col = 1 To UBound(var, 2)
+             filteredVar(count_, col) = var(i, col)
+         Next col
+         count_ = count_ + 1
+     End If
 
 Next i
 
@@ -478,7 +512,22 @@ Next i
 End Sub
 
 
-
+Public Function RemoverAcentos(texto As String) As String
+    Dim caracteresComAcento As String
+    Dim caracteresSemAcento As String
+    Dim i As Integer
+    
+    ' Mapeamento de caracteres acentuados para suas versões sem acento
+    caracteresComAcento = "ÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇáàâãäéèêëíìîïóòôõöúùûüç"
+    caracteresSemAcento = "AAAAAEEEEIIIIOOOOOUUUUCaaaaaeeeeiiiiooooouuuuc"
+    
+    ' Substituir cada caractere acentuado pelo correspondente sem acento
+    For i = 1 To Len(caracteresComAcento)
+        texto = Replace(texto, Mid(caracteresComAcento, i, 1), Mid(caracteresSemAcento, i, 1))
+    Next i
+    
+    RemoverAcentos = texto
+End Function
 
 
 Private Sub apagarVestigios()
@@ -487,6 +536,7 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
 
 

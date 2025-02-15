@@ -27,6 +27,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Private Sub button_apagarCombo_Click()
     Dim resposta As VbMsgBoxResult
     Dim id As String
@@ -108,9 +109,8 @@ End Sub
 
 Private Sub button_consultar_Click()
     
-    Call feedAvulsos
-    Call feedCombos
-    Call feedDescritivo
+    textbox_filtroStatus = ""
+    textbox_itens = ""
     
 End Sub
 
@@ -194,6 +194,7 @@ End Sub
 Private Sub feedDescritivo()
     Dim Data As Date
     Dim rg As Range
+    Dim ordem As Integer
     
     If button_calendario.Caption = "Calendario" Then
             Data = Empty
@@ -201,7 +202,9 @@ Private Sub feedDescritivo()
             Data = CDate(button_calendario.Caption)
     End If
     
-    Set rg = getRangeDescritivo(Data, textbox_filtroStatus.Text)
+    ordem = combobox_ordenar.ListIndex + 2
+    
+    Set rg = getRangeDescritivo(Data, textbox_filtroStatus.Text, ordem)
     
     With list_descritivo
         .RowSource = rg.Address(external:=True)
@@ -223,6 +226,18 @@ Private Sub MultiPage1_Change()
     Call feedCombos
     Call feedAvulsos
     Call feedDescritivo
+End Sub
+
+Private Sub textbox_filtroStatus_Change()
+    feedCombos
+    feedAvulsos
+    feedDescritivo
+End Sub
+
+Private Sub textbox_itens_Change()
+    feedCombos
+    feedAvulsos
+    feedDescritivo
 End Sub
 
 Private Sub UserForm_Activate()
@@ -261,13 +276,16 @@ Private Sub feedCombos()
     Dim Data As String
     Dim rg As Range
     Dim ordem As Integer
+    Dim produto As String
     
     Data = button_calendario.Caption
     If button_calendario.Caption = "Calendario" Then Data = ""
     
     ordem = combobox_ordenar.ListIndex + 2
     
-    Set rg = getRangeCombos(textbox_itens, Data, ordem, textbox_filtroStatus)
+    produto = RemoverAcentos(textbox_itens.Text)
+    
+    Set rg = getRangeCombos(produto, Data, ordem, textbox_filtroStatus)
     
     With list_combos
         .RowSource = rg.Address(external:=True)
@@ -282,11 +300,17 @@ End Sub
 Private Sub feedAvulsos()
     Dim Data As String
     Dim rg As Range
+    Dim ordem As Integer
+    Dim produto As String
+    
     
     Data = button_calendario.Caption
     If button_calendario.Caption = "Calendario" Then Data = ""
+    ordem = combobox_ordenar.ListIndex + 2
     
-    Set rg = getRangeAvulsos(textbox_itens, Data)
+    produto = RemoverAcentos(textbox_itens.Text)
+    
+    Set rg = getRangeAvulsos(produto, Data, ordem, textbox_filtroStatus)
     
     With list_avulsos
         .RowSource = rg.Address(external:=True)
@@ -298,6 +322,7 @@ Private Sub feedAvulsos()
     End With
 
 End Sub
+
 
 
 
