@@ -512,20 +512,73 @@ Next i
 End Sub
 
 
-Public Function RemoverAcentos(texto As String) As String
-    Dim caracteresComAcento As String
-    Dim caracteresSemAcento As String
-    Dim i As Integer
-    
-    ' Mapeamento de caracteres acentuados para suas vers鮡s sem acento
-    
-    ' Substituir cada caractere acentuado pelo correspondente sem acento
-    For i = 1 To Len(caracteresComAcento)
-        texto = Replace(texto, Mid(caracteresComAcento, i, 1), Mid(caracteresSemAcento, i, 1))
-    Next i
-    
-    RemoverAcentos = texto
+public Function RemoverAcentos(texto As String) As String
+    Dim resultado As String
+    resultado = texto
+
+    ' Substituir letras maiúsculas
+    resultado = Replace(resultado, ChrW(193), "A") ' Á
+    resultado = Replace(resultado, ChrW(192), "A") ' À
+    resultado = Replace(resultado, ChrW(194), "A") ' Â
+    resultado = Replace(resultado, ChrW(195), "A") ' Ã
+    resultado = Replace(resultado, ChrW(196), "A") ' Ä
+
+    resultado = Replace(resultado, ChrW(201), "E") ' É
+    resultado = Replace(resultado, ChrW(200), "E") ' È
+    resultado = Replace(resultado, ChrW(202), "E") ' Ê
+    resultado = Replace(resultado, ChrW(203), "E") ' Ë
+
+    resultado = Replace(resultado, ChrW(205), "I") ' Í
+    resultado = Replace(resultado, ChrW(204), "I") ' Ì
+    resultado = Replace(resultado, ChrW(206), "I") ' Î
+    resultado = Replace(resultado, ChrW(207), "I") ' Ï
+
+    resultado = Replace(resultado, ChrW(211), "O") ' Ó
+    resultado = Replace(resultado, ChrW(210), "O") ' Ò
+    resultado = Replace(resultado, ChrW(212), "O") ' Ô
+    resultado = Replace(resultado, ChrW(213), "O") ' Õ
+    resultado = Replace(resultado, ChrW(214), "O") ' Ö
+
+    resultado = Replace(resultado, ChrW(218), "U") ' Ú
+    resultado = Replace(resultado, ChrW(217), "U") ' Ù
+    resultado = Replace(resultado, ChrW(219), "U") ' Û
+    resultado = Replace(resultado, ChrW(220), "U") ' Ü
+
+    resultado = Replace(resultado, ChrW(199), "C") ' Ç
+
+    ' Substituir letras minúsculas
+    resultado = Replace(resultado, ChrW(225), "a") ' á
+    resultado = Replace(resultado, ChrW(224), "a") ' à
+    resultado = Replace(resultado, ChrW(226), "a") ' â
+    resultado = Replace(resultado, ChrW(227), "a") ' ã
+    resultado = Replace(resultado, ChrW(228), "a") ' ä
+
+    resultado = Replace(resultado, ChrW(233), "e") ' é
+    resultado = Replace(resultado, ChrW(232), "e") ' è
+    resultado = Replace(resultado, ChrW(234), "e") ' ê
+    resultado = Replace(resultado, ChrW(235), "e") ' ë
+
+    resultado = Replace(resultado, ChrW(237), "i") ' í
+    resultado = Replace(resultado, ChrW(236), "i") ' ì
+    resultado = Replace(resultado, ChrW(238), "i") ' î
+    resultado = Replace(resultado, ChrW(239), "i") ' ï
+
+    resultado = Replace(resultado, ChrW(243), "o") ' ó
+    resultado = Replace(resultado, ChrW(242), "o") ' ò
+    resultado = Replace(resultado, ChrW(244), "o") ' ô
+    resultado = Replace(resultado, ChrW(245), "o") ' õ
+    resultado = Replace(resultado, ChrW(246), "o") ' ö
+
+    resultado = Replace(resultado, ChrW(250), "u") ' ú
+    resultado = Replace(resultado, ChrW(249), "u") ' ù
+    resultado = Replace(resultado, ChrW(251), "u") ' û
+    resultado = Replace(resultado, ChrW(252), "u") ' ü
+
+    resultado = Replace(resultado, ChrW(231), "c") ' ç
+
+    RemoverAcentos = resultado
 End Function
+
 
 
 Private Sub apagarVestigios()
