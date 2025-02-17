@@ -34,6 +34,7 @@ Private Sub button_limparCalendario_Click()
 End Sub
 
 Private Sub button_salvar_Click()
+   isCanceled = False
     Me.Hide
 End Sub
 
