@@ -16,6 +16,9 @@ Attribute VB_Exposed = False
 
 Public isCanceled As Boolean
 
+Private Sub UserForm_Activate()
+    Call limparCampos
+End Sub
 
 Private Sub button_calendario_Click()
     Calendario.Show
