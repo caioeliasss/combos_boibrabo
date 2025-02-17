@@ -35,7 +35,6 @@ End Sub
 
 Private Sub button_salvar_Click()
     Me.Hide
-    Call limparCampos
 End Sub
 
 Private Sub UserForm_Initialize()
