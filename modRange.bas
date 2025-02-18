@@ -69,7 +69,7 @@ Dim comboVar As Variant
 Dim avulsoVar As Variant
 Dim var2 As Variant
 Dim filteredVar As Variant
-ReDim filteredVar(1 To 1000, 1 To 15)
+ReDim filteredVar(1 To 10000, 1 To 15)
 ReDim comboVar(1 To 500, 1 To 15)
 ReDim avulsoVar(1 To 500, 1 To 11)
 
@@ -201,7 +201,7 @@ Public Function getRangeAvulsos(pesquisa_produto As String, dataUso As String, o
 Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
-ReDim filteredVar(1 To 1000, 1 To 15)
+ReDim filteredVar(1 To 10000, 1 To 15)
 Dim frase As String
 
 Avulsos.Range("aa2:az1000").ClearContents
@@ -272,7 +272,7 @@ Public Function getRangeCombos(pesquisa_produto As String, dataUso As String, or
 Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
-ReDim filteredVar(1 To 1000, 1 To 15)
+ReDim filteredVar(1 To 10000, 1 To 15)
 Dim filtro As Boolean
 Dim frase As String
 
@@ -349,7 +349,7 @@ Public Function getRangeComboProdutos(id As String) As Range
 Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
-ReDim filteredVar(1 To 1000, 1 To 15)
+ReDim filteredVar(1 To 10000, 1 To 15)
 
 ProdutosCombo.Range("aa2:az1000").ClearContents
 
@@ -390,7 +390,7 @@ Public Function getRangeProdutos(pesquisa_nome As String, pesquisa_id As String,
 Dim rg As Range
 Dim var As Variant
 Dim filteredVar As Variant
-ReDim filteredVar(1 To 1000, 1 To 15)
+ReDim filteredVar(1 To 10000, 1 To 15)
 Dim frase As String
 
 Call setHeaders
