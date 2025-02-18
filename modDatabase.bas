@@ -96,9 +96,6 @@ Public Sub ConsultarPagamento()
                         MsgBox ("Sua assinatura nao esta valida, voce nao tera mais acesso. Entre em contato com o distribuidor")
                         isValid = False
                     End If
-                Else
-                    MsgBox ("Sua assinatura nao esta valida, voce nao tera mais acesso. Entre em contato com o distribuidor")
-                    isValid = False
                 End If
             Next i
             
