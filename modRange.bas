@@ -422,8 +422,9 @@ For i = 1 To UBound(var)
     frase = var(i, 2)
     
     frase = RemoverAcentos(frase)
+    pesquisa_nome = RemoverAcentos(pesquisa_nome)
     
-    If InStr(1, frase, UCase(pesquisa_nome), vbTextCompare) > 0 And pesquisa_id = var(i, 1) And var(i, 13) = favorito Then
+    If InStr(1, frase, UCase(pesquisa_nome), vbTextCompare) > 0 And InStr(1, var(i, 1), pesquisa_id, vbTextCompare) > 0 And var(i, 13) = favorito Then
          For col = 1 To UBound(var, 2)
              filteredVar(count_, col) = var(i, col)
          Next col
@@ -488,7 +489,7 @@ Dim var As Variant
 
 var = rg
 
-For i = 1 To UBound(var)
+For i = UBound(var) To 1 Step -1
 
     If var(i, id_coluna) = id Then
         consultarDatabase = var(i, colunaConsulta)
@@ -517,69 +518,69 @@ Next i
 End Sub
 
 
-public Function RemoverAcentos(texto As String) As String
+Public Function RemoverAcentos(texto As String) As String
     Dim resultado As String
     resultado = texto
 
-    ' Substituir letras mai√∫sculas
-    resultado = Replace(resultado, ChrW(193), "A") ' √Å
-    resultado = Replace(resultado, ChrW(192), "A") ' √Ä
-    resultado = Replace(resultado, ChrW(194), "A") ' √Ç
-    resultado = Replace(resultado, ChrW(195), "A") ' √É
-    resultado = Replace(resultado, ChrW(196), "A") ' √Ñ
+    ' Substituir letras mai˙sculas
+    resultado = Replace(resultado, ChrW(193), "A") ' ¡
+    resultado = Replace(resultado, ChrW(192), "A") ' ¿
+    resultado = Replace(resultado, ChrW(194), "A") ' ¬
+    resultado = Replace(resultado, ChrW(195), "A") ' √
+    resultado = Replace(resultado, ChrW(196), "A") ' ƒ
 
-    resultado = Replace(resultado, ChrW(201), "E") ' √â
-    resultado = Replace(resultado, ChrW(200), "E") ' √à
-    resultado = Replace(resultado, ChrW(202), "E") ' √ä
-    resultado = Replace(resultado, ChrW(203), "E") ' √ã
+    resultado = Replace(resultado, ChrW(201), "E") ' …
+    resultado = Replace(resultado, ChrW(200), "E") ' »
+    resultado = Replace(resultado, ChrW(202), "E") '  
+    resultado = Replace(resultado, ChrW(203), "E") ' À
 
-    resultado = Replace(resultado, ChrW(205), "I") ' √ç
-    resultado = Replace(resultado, ChrW(204), "I") ' √å
-    resultado = Replace(resultado, ChrW(206), "I") ' √é
-    resultado = Replace(resultado, ChrW(207), "I") ' √è
+    resultado = Replace(resultado, ChrW(205), "I") ' Õ
+    resultado = Replace(resultado, ChrW(204), "I") ' Ã
+    resultado = Replace(resultado, ChrW(206), "I") ' Œ
+    resultado = Replace(resultado, ChrW(207), "I") ' œ
 
-    resultado = Replace(resultado, ChrW(211), "O") ' √ì
-    resultado = Replace(resultado, ChrW(210), "O") ' √í
-    resultado = Replace(resultado, ChrW(212), "O") ' √î
-    resultado = Replace(resultado, ChrW(213), "O") ' √ï
-    resultado = Replace(resultado, ChrW(214), "O") ' √ñ
+    resultado = Replace(resultado, ChrW(211), "O") ' ”
+    resultado = Replace(resultado, ChrW(210), "O") ' “
+    resultado = Replace(resultado, ChrW(212), "O") ' ‘
+    resultado = Replace(resultado, ChrW(213), "O") ' ’
+    resultado = Replace(resultado, ChrW(214), "O") ' ÷
 
-    resultado = Replace(resultado, ChrW(218), "U") ' √ö
-    resultado = Replace(resultado, ChrW(217), "U") ' √ô
-    resultado = Replace(resultado, ChrW(219), "U") ' √õ
-    resultado = Replace(resultado, ChrW(220), "U") ' √ú
+    resultado = Replace(resultado, ChrW(218), "U") ' ⁄
+    resultado = Replace(resultado, ChrW(217), "U") ' Ÿ
+    resultado = Replace(resultado, ChrW(219), "U") ' €
+    resultado = Replace(resultado, ChrW(220), "U") ' ‹
 
-    resultado = Replace(resultado, ChrW(199), "C") ' √á
+    resultado = Replace(resultado, ChrW(199), "C") ' «
 
-    ' Substituir letras min√∫sculas
-    resultado = Replace(resultado, ChrW(225), "a") ' √°
-    resultado = Replace(resultado, ChrW(224), "a") ' √†
-    resultado = Replace(resultado, ChrW(226), "a") ' √¢
-    resultado = Replace(resultado, ChrW(227), "a") ' √£
-    resultado = Replace(resultado, ChrW(228), "a") ' √§
+    ' Substituir letras min˙sculas
+    resultado = Replace(resultado, ChrW(225), "a") ' ·
+    resultado = Replace(resultado, ChrW(224), "a") ' ‡
+    resultado = Replace(resultado, ChrW(226), "a") ' ‚
+    resultado = Replace(resultado, ChrW(227), "a") ' „
+    resultado = Replace(resultado, ChrW(228), "a") ' ‰
 
-    resultado = Replace(resultado, ChrW(233), "e") ' √©
-    resultado = Replace(resultado, ChrW(232), "e") ' √®
-    resultado = Replace(resultado, ChrW(234), "e") ' √™
-    resultado = Replace(resultado, ChrW(235), "e") ' √´
+    resultado = Replace(resultado, ChrW(233), "e") ' È
+    resultado = Replace(resultado, ChrW(232), "e") ' Ë
+    resultado = Replace(resultado, ChrW(234), "e") ' Í
+    resultado = Replace(resultado, ChrW(235), "e") ' Î
 
-    resultado = Replace(resultado, ChrW(237), "i") ' √≠
-    resultado = Replace(resultado, ChrW(236), "i") ' √¨
-    resultado = Replace(resultado, ChrW(238), "i") ' √Æ
-    resultado = Replace(resultado, ChrW(239), "i") ' √Ø
+    resultado = Replace(resultado, ChrW(237), "i") ' Ì
+    resultado = Replace(resultado, ChrW(236), "i") ' Ï
+    resultado = Replace(resultado, ChrW(238), "i") ' Ó
+    resultado = Replace(resultado, ChrW(239), "i") ' Ô
 
-    resultado = Replace(resultado, ChrW(243), "o") ' √≥
-    resultado = Replace(resultado, ChrW(242), "o") ' √≤
-    resultado = Replace(resultado, ChrW(244), "o") ' √¥
-    resultado = Replace(resultado, ChrW(245), "o") ' √µ
-    resultado = Replace(resultado, ChrW(246), "o") ' √∂
+    resultado = Replace(resultado, ChrW(243), "o") ' Û
+    resultado = Replace(resultado, ChrW(242), "o") ' Ú
+    resultado = Replace(resultado, ChrW(244), "o") ' Ù
+    resultado = Replace(resultado, ChrW(245), "o") ' ı
+    resultado = Replace(resultado, ChrW(246), "o") ' ˆ
 
-    resultado = Replace(resultado, ChrW(250), "u") ' √∫
-    resultado = Replace(resultado, ChrW(249), "u") ' √π
-    resultado = Replace(resultado, ChrW(251), "u") ' √ª
-    resultado = Replace(resultado, ChrW(252), "u") ' √º
+    resultado = Replace(resultado, ChrW(250), "u") ' ˙
+    resultado = Replace(resultado, ChrW(249), "u") ' ˘
+    resultado = Replace(resultado, ChrW(251), "u") ' ˚
+    resultado = Replace(resultado, ChrW(252), "u") ' ¸
 
-    resultado = Replace(resultado, ChrW(231), "c") ' √ß
+    resultado = Replace(resultado, ChrW(231), "c") ' Á
 
     RemoverAcentos = resultado
 End Function
@@ -592,6 +593,7 @@ Private Sub apagarVestigios()
 
 
 End Sub
+
 
 
 
