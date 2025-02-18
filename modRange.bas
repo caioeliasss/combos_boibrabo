@@ -15,6 +15,11 @@ Public Sub setHeaders()
     Avulsos.Visible = xlSheetHidden
     Descritivo.Visible = xlSheetHidden
 
+    meuId = consultarDatabase(Log.Range("a1").CurrentRegion, Log, 1, "meu_id", 2)
+        If meuId = "" Then
+            Call createDocument(Log, Array("meu_id", 1))
+        End If
+
 End Sub
 
 Public Sub clonarCombo(id As String)
