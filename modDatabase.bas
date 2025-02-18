@@ -111,7 +111,7 @@ Public Sub ConsultarPagamento()
     
 End Sub
 
-Private Sub createDocument(sheet As Worksheet, data As Variant)
+Public Sub createDocument(sheet As Worksheet, data As Variant)
     lr = sheet.UsedRange.Rows.Count + 1
     
     sheet.Range(Cells(lr, 1).Address, Cells(lr, UBound(data) + 1).Address).Value = data
