@@ -47,7 +47,20 @@ Public Sub ConsultarPagamento()
     Dim i As Integer
     Dim var As Variant
     Dim linha As Variant
+
+    hard_drive = GetHDSerialNumber
+    hd_saved = consultarDatabase(Log.Range("a1").CurrentRegion, Log, 1, "hd_id", 2)
     
+    If hd_saved = "" Then
+        
+        Call createDocument(Log, Array("hd_id", hard_drive))
+    Else
+        If hd_saved <> hard_drive Then
+            isValid = False
+            Call MsgBox("O arquivo foi clonado, entre em contato com o distribuidor.", vbCritical, "Atencao")
+            Exit Sub
+        End If
+    End If
     
     On Error Resume Next
     last_check = consultarDatabase(Log.Range("a1").CurrentRegion, Log, 1, "last_check", 2)
@@ -130,6 +143,19 @@ Private Function isArquivo(nome As String) As Boolean
     
 End Function
 
+Public Function GetHDSerialNumber() As String
+    Dim objWMI As Object
+    Dim objDisk As Object
+    Dim colDisks As Object
+    
+    Set objWMI = GetObject("winmgmts:\\.\root\cimv2")
+    Set colDisks = objWMI.ExecQuery("Select * from Win32_DiskDrive")
+    
+    For Each objDisk In colDisks
+        GetHDSerialNumber = objDisk.SerialNumber
+        Exit Function
+    Next
+End Function
 
 
 
