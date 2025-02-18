@@ -64,7 +64,7 @@ Public Sub ConsultarPagamento()
         
         URL = "https://docs.google.com/spreadsheets/d/1_MmDQ2Ei3xBqD-vyIp6icLEPCUz1IIaSpUbmN7OxfB0/export?format=csv"
         
-        meuId = consultarDatabase(Log.Range("a1"), Log, 1, "meu_id", 2)
+        meuId = consultarDatabase(Log.Range("a1").CurrentRegion, Log, 1, "meu_id", 2)
         
         Set http = CreateObject("WinHttp.WinHttpRequest.5.1")
         http.Open "GET", URL, False
