@@ -102,7 +102,7 @@ Public Sub ConsultarPagamento()
             
             For i = 1 To UBound(var)
                 If var(i, 0) = meuId And primeiroDia = CDate(var(i, 2)) Then
-                    If var(i, 3) = "TRUE" Then
+                    If InStr(1, var(i, 3), "TRUE", vbTextCompare) > 0 Then
                         Call createDocument(Log, Array("last_check", Now))
                         isValid = True
                     Else
